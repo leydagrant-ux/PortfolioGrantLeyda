@@ -1,0 +1,4 @@
+Thumbs.db
+.DS_Store
+assets/raw/*
+!assets/raw/.gitkeep

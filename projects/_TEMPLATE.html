@@ -1,0 +1,242 @@
+<!doctype html>
+<!--
+  ===========================================================================
+  PROJECT PAGE TEMPLATE
+
+  Copy this file to projects/<your-slug>.html and work through the REPLACE
+  comments. Delete any section you don't need — nothing here is required.
+
+  Then add a matching entry to data/projects.js and you're done. See
+  ADDING_A_PROJECT.md for the whole loop.
+  ===========================================================================
+-->
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- REPLACE: title and description -->
+<title>Project Name — Grant Leyda</title>
+<meta name="description" content="One sentence describing the project.">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Name — Grant Leyda">
+<meta property="og:description" content="One sentence describing the project.">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2306080b'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='monospace' fill='%2335d6f2'>G</text></svg>">
+<link rel="stylesheet" href="../css/site.css">
+
+<script>
+  try {
+    var t = localStorage.getItem('gl-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+</head>
+
+<body data-base="../">
+
+<nav class="nav">
+  <a class="nav__brand" href="../index.html">Grant Leyda <span>/ ME</span></a>
+  <div class="nav__links">
+    <a href="../index.html#work">Work</a>
+    <a href="../assets/Grant_Leyda_Resume_2026.pdf">Résumé</a>
+    <button class="icon-btn" data-theme-toggle aria-label="Switch theme">◑</button>
+  </div>
+</nav>
+
+<!-- ===================================================================== -->
+<header class="case-hero">
+  <!-- OPTIONAL: a faded background image. Delete this block to skip it. -->
+  <div class="case-hero__bg" aria-hidden="true">
+    <img src="../assets/img/REPLACE-cover.webp" alt="">
+  </div>
+
+  <div class="case-hero__inner wrap">
+    <a class="backlink" href="../index.html">← All work</a>
+
+    <!-- REPLACE: kicker, title, lede -->
+    <div class="hero__kicker">Category · Year · Status</div>
+    <h1>Project Name</h1>
+    <p class="lede">
+      Two or three sentences. What it is, what problem it solved, and what the outcome was.
+      Lead with the result, not the process.
+    </p>
+
+    <!-- REPLACE: the facts strip. Add or remove entries freely. -->
+    <div class="facts">
+      <div><div class="fact__k">Role</div><div class="fact__v">What you did</div></div>
+      <div><div class="fact__k">Tools</div><div class="fact__v">SolidWorks, MATLAB</div></div>
+      <div><div class="fact__k">Duration</div><div class="fact__v">Fall 2026</div></div>
+      <div><div class="fact__k">Status</div><div class="fact__v"><span class="ok">Complete</span></div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================================================================== -->
+<!-- SECTION: the problem -->
+<section class="section">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:3rem">
+      <div class="prose" data-reveal>
+        <div class="eyebrow"><span class="eyebrow__i">01</span> The problem</div>
+        <h2 style="margin-top:0">REPLACE: what needed solving</h2>
+        <p>REPLACE: the situation, the constraint, why it mattered.</p>
+      </div>
+
+      <figure data-reveal style="margin:0">
+        <img src="../assets/img/REPLACE-photo.webp" alt="REPLACE: describe the image">
+        <figcaption>REPLACE: caption with a real detail in it.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- SECTION: requirements table. Delete if not applicable. -->
+<section class="section--tight gridbg">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow__i">02</span> Requirements</div>
+    <h2 data-reveal>What it had to do</h2>
+
+    <div class="table-scroll" data-reveal style="margin-top:2rem">
+      <table>
+        <thead>
+          <tr><th>Requirement</th><th>Target</th><th>Delivered</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>REPLACE</td><td class="mono">value</td><td class="ok mono">Met</td></tr>
+          <tr><td>REPLACE</td><td class="mono">value</td><td class="warn mono">Partial</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- SECTION: approach + image gallery -->
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow__i">03</span> Approach</div>
+    <h2 data-reveal>REPLACE: how you solved it</h2>
+    <p class="lede" data-reveal style="--delay:60ms">REPLACE: the one-paragraph version.</p>
+
+    <figure class="figure--wide" data-reveal style="margin-top:2.5rem">
+      <img src="../assets/img/REPLACE-hero.webp" alt="REPLACE">
+      <figcaption>REPLACE</figcaption>
+    </figure>
+
+    <!-- Gallery items open in the lightbox automatically. Each needs data-full
+         (the large image) and ideally data-caption. -->
+    <div class="gallery" data-reveal>
+      <button class="shot" data-full="../assets/img/REPLACE-1.webp"
+              data-caption="REPLACE: the caption shown in the lightbox.">
+        <img src="../assets/img/REPLACE-1-thumb.webp" alt="REPLACE">
+        <figcaption>REPLACE: short label</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/REPLACE-2.webp"
+              data-caption="REPLACE">
+        <img src="../assets/img/REPLACE-2-thumb.webp" alt="REPLACE">
+        <figcaption>REPLACE</figcaption>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- SECTION: 3D viewers. Delete this whole section if you have no STL.
+     Drop the .stl into assets/raw/ and run tools/build_assets.py to publish it. -->
+<section class="section--tight">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow__i">04</span> Geometry</div>
+    <h2 data-reveal>Turn the actual parts</h2>
+
+    <div class="viewers" data-reveal style="margin-top:2.5rem">
+      <div class="viewer" data-model="../assets/models/REPLACE.stl" data-name="REPLACE">
+        <canvas class="viewer__canvas" aria-hidden="true"></canvas>
+        <div class="viewer__grid" aria-hidden="true"></div>
+        <div class="viewer__head">
+          <div>
+            <div class="viewer__name">REPLACE: part name</div>
+            <div class="viewer__sub">REPLACE: material or note</div>
+          </div>
+          <div class="viewer__tools">
+            <button class="icon-btn" data-wire aria-pressed="false" aria-label="Toggle wireframe" title="Wireframe">◇</button>
+            <button class="icon-btn" data-reset aria-label="Reset view" title="Reset view">⟲</button>
+          </div>
+        </div>
+        <div class="viewer__dims" data-dims></div>
+        <div class="viewer__hint">Drag to orbit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- SECTION: outcome. Keep the honest note — it is the most credible thing
+     on any project page. -->
+<section class="section--tight">
+  <div class="wrap prose">
+    <div class="eyebrow"><span class="eyebrow__i">05</span> Outcome</div>
+    <h2 style="margin-top:0" data-reveal>What worked, and what I'd change</h2>
+    <p data-reveal>REPLACE: the result, with a number in it if you have one.</p>
+
+    <div class="callout callout--signal" data-reveal>
+      <div class="callout__label">The honest part</div>
+      <p style="margin-bottom:0">
+        REPLACE: what fell short, and specifically what you would do differently. Do not
+        skip this — it is what makes the rest believable.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight">
+  <div class="wrap">
+    <nav class="pager" data-pager aria-label="More projects"></nav>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h2>Let's talk</h2>
+        <p class="lede">Happy to go deeper on any of this.</p>
+        <a class="btn btn--primary" href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:1rem">Contact</div>
+        <div class="footer__links">
+          <a href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+          <a href="tel:+18176278156">817-627-8156</a>
+          <a href="https://www.linkedin.com/in/grant-leyda" rel="noopener">LinkedIn</a>
+          <a href="../assets/Grant_Leyda_Resume_2026.pdf">Résumé (PDF)</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__meta">
+      <span>© 2026 Grant Leyda</span>
+      <span>Bedford, Texas</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+  import { initAll } from '../js/main.js';
+  import { renderPager } from '../js/project-cards.js';
+  import { initViewers } from '../js/viewer3d.js';
+  import { initLightbox, initCompare } from '../js/lightbox.js';
+
+  // REPLACE 'your-slug' with the slug you used in data/projects.js
+  renderPager('your-slug');
+  initAll();
+  initViewers();   // delete if this page has no 3D viewer
+  initLightbox();
+  initCompare();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cram-A-Lot Chassis Rotator — Grant Leyda</title>
+<meta name="description" content="Senior capstone: a 2,000 lb industrial chassis rotator designed, analysed, manufactured and delivered. Includes an interactive pin sizing study built from the original hand calculations.">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cram-A-Lot Chassis Rotator — Grant Leyda">
+<meta property="og:description" content="From sponsor problem statement to delivered hardware. Orbit the parts, run the pin analysis yourself.">
+<meta property="og:image" content="../assets/img/cad-machine-loaded.webp">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2306080b'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='monospace' fill='%2335d6f2'>G</text></svg>">
+<link rel="stylesheet" href="../css/site.css">
+
+<script>
+  try {
+    var t = localStorage.getItem('gl-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+</head>
+
+<body data-base="../">
+
+<nav class="nav">
+  <a class="nav__brand" href="../index.html">Grant Leyda <span>/ ME</span></a>
+  <div class="nav__links">
+    <a href="../index.html#work">Work</a>
+    <a href="#analysis">Analysis</a>
+    <a href="#study">Pin study</a>
+    <a href="#build">Build</a>
+    <button class="icon-btn" data-theme-toggle aria-label="Switch theme">◑</button>
+  </div>
+</nav>
+
+<!-- ===================================================================== -->
+<header class="case-hero">
+  <div class="case-hero__bg" aria-hidden="true">
+    <img src="../assets/img/cad-machine-loaded.webp" alt="">
+  </div>
+
+  <div class="case-hero__inner wrap">
+    <a class="backlink" href="../index.html">← All work</a>
+    <div class="hero__kicker">Senior Capstone · MEEG 41902 · Fall 2025 – Spring 2026</div>
+    <h1>Cram-A-Lot Chassis Rotator</h1>
+    <p class="lede">
+      A 2,000 lb powered mechanism that rotates production chassis 180° without tying up
+      the overhead crane. Sponsored by JVM / Cram-A-Lot, designed and built by a team of
+      six, and delivered to the customer's floor in April 2026.
+    </p>
+
+    <div class="facts">
+      <div><div class="fact__k">Sponsor</div><div class="fact__v">JVM / Cram-A-Lot</div></div>
+      <div><div class="fact__k">Industry advisor</div><div class="fact__v">Natalie Hernandez</div></div>
+      <div><div class="fact__k">Faculty advisor</div><div class="fact__v">Dr. David Jensen</div></div>
+      <div><div class="fact__k">Team</div><div class="fact__v">6 mechanical engineers</div></div>
+      <div><div class="fact__k">My role</div><div class="fact__v">Critical component analysis · fabrication</div></div>
+      <div><div class="fact__k">Status</div><div class="fact__v"><span class="ok">Delivered &amp; load tested</span></div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================================================================== -->
+<section class="section">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:3rem">
+
+      <div class="prose" data-reveal>
+        <div class="eyebrow"><span class="eyebrow__i">01</span> The problem</div>
+        <h2 style="margin-top:0">A crane doing a job it was never meant to do</h2>
+        <p>
+          JVM rotates welded steel chassis during production. Their existing method hung the
+          chassis from the facility's overhead crane and winch and let an operator turn it by
+          hand with a remote. It worked, but it put cyclic wear on the winch cables, occupied
+          a crane that the rest of the shop needed, and put a person close to a suspended
+          2,000 lb load.
+        </p>
+        <p>
+          Cram-A-Lot asked for a dedicated machine: rotate the chassis a full 180°, take the
+          crane out of the loop, shrink the floor space it needs, and keep the operator at a
+          safe distance — all for under $7,500 and manufacturable in their own shop.
+        </p>
+      </div>
+
+      <figure data-reveal style="margin:0">
+        <img src="../assets/img/rotator-in-use.webp" width="989" height="971"
+             alt="A steel chassis suspended and tilted mid-rotation on the shop floor at JVM">
+        <figcaption>
+          The operation the machine replaces — a chassis mid-rotation, hanging from the
+          facility crane.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight gridbg">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow__i">02</span> Requirements</div>
+    <h2 data-reveal>What it had to do</h2>
+
+    <div class="table-scroll" data-reveal style="margin-top:2rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Requirement</th>
+            <th>Target</th>
+            <th>Delivered</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Rotation</td><td class="mono">180° ± 10°</td><td class="ok mono">Met</td></tr>
+          <tr><td>Load capacity</td><td class="mono">≥ 2,000 lb</td><td class="ok mono">Met</td></tr>
+          <tr><td>Chassis configurations</td><td class="mono">4 sizes</td><td class="ok mono">Met — modular arms</td></tr>
+          <tr><td>Footprint</td><td class="mono">8 ft × 5 ft</td><td class="ok mono">Met</td></tr>
+          <tr><td>Crane dependency</td><td>Eliminate from rotation</td><td class="ok mono">Met</td></tr>
+          <tr><td>Operator standoff</td><td class="mono">≥ 3 ft</td><td class="ok mono">Met</td></tr>
+          <tr><td>Cycle time</td><td class="mono">≤ 5 min</td><td class="ok mono">Met</td></tr>
+          <tr><td>Power</td><td class="mono">480 V 3-phase</td><td class="ok mono">Met</td></tr>
+          <tr><td>Budget</td><td class="mono">≤ $7,500</td><td class="ok mono">$5,432</td></tr>
+          <tr><td>Manufacturable in-house</td><td>UARK or JVM facilities</td><td class="ok mono">Met</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mono" style="font-size:.8rem;color:var(--ink-3);max-width:70ch">
+      Governing standard: ASME B30.20, Below-the-Hook Lifting Devices.
+    </p>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow__i">03</span> The design</div>
+    <h2 data-reveal>A rotator plate, two forks, and a clamping top arm</h2>
+    <p class="lede" data-reveal style="--delay:60ms">
+      The chassis loads onto long forks, a top arm swings down to clamp it, and a gearmotor
+      driving the central rotator plate turns the whole assembly through 180°. An electric
+      actuator drives the top arm; a counterweight keeps the plate balanced through the arc.
+    </p>
+
+    <figure class="figure--wide" data-reveal style="margin-top:2.5rem">
+      <img src="../assets/img/cad-machine-loaded.webp" width="1442" height="1075"
+           alt="SolidWorks render of the completed rotator assembly with a chassis clamped between the forks and top arm">
+      <figcaption>
+        Full assembly with a chassis loaded. The forks carry the load, the top arm clamps
+        from above, and the vertical plate at right is the rotating axis.
+      </figcaption>
+    </figure>
+
+    <div class="gallery" data-reveal>
+      <button class="shot" data-full="../assets/img/assembly-ballooned.webp"
+              data-caption="Ballooned exploded assembly, keyed to the drawing package parts list.">
+        <img src="../assets/img/assembly-ballooned-thumb.webp"
+             alt="Exploded assembly drawing with numbered balloons identifying each part">
+        <figcaption>Ballooned exploded assembly</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/subassembly-exploded.webp"
+              data-caption="Drive subassembly — gearmotor, sprocket, bushings, shaft and bearing mount.">
+        <img src="../assets/img/subassembly-exploded-thumb.webp"
+             alt="Exploded view of the drive subassembly showing gearmotor, sprocket and shaft">
+        <figcaption>Drive subassembly</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/cad-machine-side.webp"
+              data-caption="Side elevation with the actuator extended and the top arm raised.">
+        <img src="../assets/img/cad-machine-side-thumb.webp"
+             alt="Side view render of the rotator with the actuator extended">
+        <figcaption>Side elevation</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/part-variants.webp"
+              data-caption="Arm design iterations — the geometry changed as the FEA came back.">
+        <img src="../assets/img/part-variants-thumb.webp"
+             alt="Three iterations of the arm part geometry side by side">
+        <figcaption>Arm iterations</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/motion-chassis-level.webp"
+              data-caption="Motion study, chassis level — start of the rotation cycle.">
+        <img src="../assets/img/motion-chassis-level-thumb.webp"
+             alt="Motion study frame with the chassis held level">
+        <figcaption>Motion study — 0°</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/motion-chassis-rotated.webp"
+              data-caption="Motion study, chassis rotated — collision check confirmed clearance through the full arc.">
+        <img src="../assets/img/motion-chassis-rotated-thumb.webp"
+             alt="Motion study frame with the chassis rotated on its side">
+        <figcaption>Motion study — rotated</figcaption>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow__i">04</span> Geometry</div>
+    <h2 data-reveal>Turn the actual parts</h2>
+    <p class="lede" data-reveal style="--delay:60ms">
+      These are the real STL exports from the SolidWorks models, not illustrations. Drag to
+      orbit, scroll to zoom, and toggle the wireframe. The dimensions under each part are
+      measured off its mesh at load time, and the part numbers match the costed BOM.
+    </p>
+
+    <div class="viewers" data-reveal style="margin-top:2.5rem">
+      <div class="viewer" data-model="../assets/models/chassis.stl" data-name="SCT2.5C chassis">
+        <canvas class="viewer__canvas" aria-hidden="true"></canvas>
+        <div class="viewer__grid" aria-hidden="true"></div>
+        <div class="viewer__head">
+          <div>
+            <div class="viewer__name">SCT2.5C chassis</div>
+            <div class="viewer__sub">The governing load case</div>
+          </div>
+          <div class="viewer__tools">
+            <button class="icon-btn" data-wire aria-pressed="false" aria-label="Toggle wireframe" title="Wireframe">&#9671;</button>
+            <button class="icon-btn" data-reset aria-label="Reset view" title="Reset view">&#10226;</button>
+          </div>
+        </div>
+        <div class="viewer__dims" data-dims></div>
+        <div class="viewer__hint">Drag to orbit</div>
+      </div>
+
+      <div class="viewer" data-model="../assets/models/top-arm.stl" data-name="Top arm section">
+        <canvas class="viewer__canvas" aria-hidden="true"></canvas>
+        <div class="viewer__grid" aria-hidden="true"></div>
+        <div class="viewer__head">
+          <div>
+            <div class="viewer__name">Top arm &mdash; section</div>
+            <div class="viewer__sub">Clamps the chassis from above</div>
+          </div>
+          <div class="viewer__tools">
+            <button class="icon-btn" data-wire aria-pressed="false" aria-label="Toggle wireframe" title="Wireframe">&#9671;</button>
+            <button class="icon-btn" data-reset aria-label="Reset view" title="Reset view">&#10226;</button>
+          </div>
+        </div>
+        <div class="viewer__dims" data-dims></div>
+        <div class="viewer__hint">Drag to orbit</div>
+      </div>
+
+      <div class="viewer" data-model="../assets/models/ua8r-plate.stl" data-name="UA8R plate">
+        <canvas class="viewer__canvas" aria-hidden="true"></canvas>
+        <div class="viewer__grid" aria-hidden="true"></div>
+        <div class="viewer__head">
+          <div>
+            <div class="viewer__name">UA8R</div>
+            <div class="viewer__sub">1&frac14;&Prime; hot-rolled plate &middot; A36</div>
+          </div>
+          <div class="viewer__tools">
+            <button class="icon-btn" data-wire aria-pressed="false" aria-label="Toggle wireframe" title="Wireframe">&#9671;</button>
+            <button class="icon-btn" data-reset aria-label="Reset view" title="Reset view">&#10226;</button>
+          </div>
+        </div>
+        <div class="viewer__dims" data-dims></div>
+        <div class="viewer__hint">Drag to orbit</div>
+      </div>
+
+      <div class="viewer" data-model="../assets/models/ua9r-plate.stl" data-name="UA9R plate">
+        <canvas class="viewer__canvas" aria-hidden="true"></canvas>
+        <div class="viewer__grid" aria-hidden="true"></div>
+        <div class="viewer__head">
+          <div>
+            <div class="viewer__name">UA9R</div>
+            <div class="viewer__sub">1&frac14;&Prime; hot-rolled plate &middot; A36</div>
+          </div>
+          <div class="viewer__tools">
+            <button class="icon-btn" data-wire aria-pressed="false" aria-label="Toggle wireframe" title="Wireframe">&#9671;</button>
+            <button class="icon-btn" data-reset aria-label="Reset view" title="Reset view">&#10226;</button>
+          </div>
+        </div>
+        <div class="viewer__dims" data-dims></div>
+        <div class="viewer__hint">Drag to orbit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section gridbg" id="analysis">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow__i">05</span> Analysis</div>
+    <h2 data-reveal>Critical component analysis</h2>
+
+    <div class="callout" data-reveal>
+      <div class="callout__label">My contribution</div>
+      <p>
+        This was a six-person team, and the analysis work was split by component. The two
+        analyses below — <strong>the central pin</strong> and <strong>the clevis
+        mount</strong> — are mine, start to finish: load case, hand calculations, FEA setup,
+        and the sizing recommendation the team built to.
+      </p>
+      <p style="margin-bottom:0">
+        The upper-arm analysis was Diana Trujillo's and the restraining-arm analysis was
+        Aidan Rheay's; both are summarised here because the system-level story does not make
+        sense without them. Full team: Cole McCallum, Cooper Ulrich, Maverick Wynn,
+        Diana Trujillo, Aidan Rheay and myself.
+      </p>
+    </div>
+
+    <h3 style="margin-top:3rem" data-reveal>The central pin</h3>
+    <p style="max-width:68ch" data-reveal>
+      This pin holds the third top arm onto the rotator plate. If it fails, the arm lets go
+      and drops a 2,000 lb chassis — so it gets the most conservative treatment of anything
+      on the machine. I ran it at <span class="mono">9,192.96 lbf</span> in single shear across
+      three candidate diameters, checking shear, bearing and von Mises by hand and then
+      confirming with SolidWorks Simulation.
+    </p>
+
+    <div class="gallery" data-reveal>
+      <button class="shot" data-full="../assets/img/fea-pin-vonmises.webp"
+              data-caption="Von Mises stress on the 1.5 in pin — peak 2.229e4 psi against a 3.626e4 psi yield.">
+        <img src="../assets/img/fea-pin-vonmises-thumb.webp"
+             alt="SolidWorks von Mises stress plot of the pin showing a blue and green contour band">
+        <figcaption>Pin — von Mises stress</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/fea-pin-displacement.webp"
+              data-caption="Displacement on the 1.5 in pin under the 9,192.96 lbf load case.">
+        <img src="../assets/img/fea-pin-displacement-thumb.webp"
+             alt="SolidWorks displacement plot of the pin">
+        <figcaption>Pin — displacement</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/fea-pin-fos.webp"
+              data-caption="Factor of safety distribution. The FEA minimum lands at 1.6, well below the hand calculation — see the note below the study.">
+        <img src="../assets/img/fea-pin-fos-thumb.webp"
+             alt="SolidWorks factor of safety plot of the pin, largely red indicating high margin">
+        <figcaption>Pin — factor of safety</figcaption>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight" id="study">
+  <div class="wrap">
+    <div class="study" data-pin-study data-reveal>
+      <div class="study__head">
+        <div>
+          <h3>Pin sizing study — live</h3>
+          <p>
+            The same hand calculation I ran for the report, made continuous. Move the
+            diameter and watch the margin change.
+          </p>
+        </div>
+        <button class="btn btn--sm" data-study-reset style="margin-left:auto">Reset to report</button>
+      </div>
+
+      <div class="study__body">
+        <div class="study__controls">
+          <div class="field">
+            <div class="field__row">
+              <label class="field__label" for="in-d">Pin diameter</label>
+              <span class="field__val"><span data-out="d">1.50</span><small>in</small></span>
+            </div>
+            <input id="in-d" type="range" data-in="d" min="0.75" max="2.5" step="0.05" value="1.5">
+            <div class="ticks"><span>0.75</span><span>1.0</span><span>1.5</span><span>2.0</span><span>2.5</span></div>
+          </div>
+
+          <div class="field">
+            <div class="field__row">
+              <label class="field__label" for="in-P">Applied load</label>
+              <span class="field__val"><span data-out="P">9,192.96</span><small>lbf</small></span>
+            </div>
+            <input id="in-P" type="range" data-in="P" min="1000" max="16000" step="0.01" value="9192.96">
+            <div class="ticks"><span>1k</span><span>9,192.96 — design</span><span>16k</span></div>
+          </div>
+
+          <details class="adv">
+            <summary>Assumptions</summary>
+            <div>
+              <div class="field">
+                <div class="field__row">
+                  <label class="field__label" for="in-t">Bearing thickness</label>
+                  <span class="field__val"><span data-out="t">8.0</span><small>in</small></span>
+                </div>
+                <input id="in-t" type="range" data-in="t" min="2" max="12" step="0.5" value="8">
+              </div>
+              <div class="field">
+                <div class="field__row">
+                  <label class="field__label" for="in-Su">Material S<sub>u</sub></label>
+                  <span class="field__val"><span data-out="Su">58,000</span><small>psi</small></span>
+                </div>
+                <input id="in-Su" type="range" data-in="Su" min="30000" max="120000" step="1000" value="58000">
+                <div class="ticks"><span>30k</span><span>A36 = 58k</span><span>120k</span></div>
+              </div>
+            </div>
+          </details>
+
+          <div class="mono" style="font-size:.72rem;color:var(--ink-3);line-height:1.6;border-top:1px solid var(--line);padding-top:1rem">
+            τ = 4P / πd²<br>
+            σ<sub>b</sub> = P / (d·t)<br>
+            σ<sub>vm</sub> = √(σ<sub>b</sub>² + 3τ²)<br>
+            FOS = S<sub>u</sub> / σ<sub>vm</sub>
+          </div>
+        </div>
+
+        <div class="study__out">
+          <div class="gauge-row">
+            <div class="gauge" data-gauge data-state="ok">
+              <svg role="img" aria-label="Factor of safety gauge"></svg>
+              <div class="gauge__center">
+                <div class="gauge__num" data-out="fos">6.41</div>
+                <div class="gauge__cap">Factor of safety</div>
+              </div>
+            </div>
+
+            <div class="readouts">
+              <div class="readout">
+                <div class="readout__k">Shear τ</div>
+                <div class="readout__value"><span data-out="tau">5,202</span><small>psi</small></div>
+              </div>
+              <div class="readout">
+                <div class="readout__k">Bearing σ<sub>b</sub></div>
+                <div class="readout__value"><span data-out="bearing">766.1</span><small>psi</small></div>
+              </div>
+              <div class="readout">
+                <div class="readout__k">Von Mises σ<sub>vm</sub></div>
+                <div class="readout__value"><span data-out="vm">9,043</span><small>psi</small></div>
+              </div>
+              <div class="readout">
+                <div class="readout__k">Verdict</div>
+                <div class="readout__value" style="font-size:.82rem"><span class="ok mono" data-out="verdict">Above the 1.67 ASD reference</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart">
+            <svg data-chart role="img" aria-label="Chart of factor of safety against pin diameter, with the three analysed diameters marked"></svg>
+            <div class="chart__legend">
+              <span><i class="swatch"></i> Hand calculation</span>
+              <span><i class="swatch swatch--dot"></i> Diameters analysed in the report</span>
+              <span><i class="swatch swatch--band"></i> Below ASD reference FOS 1.67</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout--signal" data-reveal>
+      <div class="callout__label">Why the FEA and the hand calc disagree</div>
+      <p>
+        At the 1.5 in diameter we selected, the hand calculation gives FOS 6.41 but
+        SolidWorks reports a minimum of <strong>1.6</strong>. That gap is not an error in
+        either one — they are answering different questions.
+      </p>
+      <p>
+        The hand calculation treats shear as uniform over the pin cross-section and bearing
+        as uniform over the projected contact area. The FEA resolves the real contact
+        patch, where stress concentrates sharply at the edges of the bearing surface and the
+        mesh reports a local peak that a nominal-stress calculation cannot see. Refining the
+        mesh at a contact edge drives that peak higher without ever converging, which is the
+        classic mesh-singularity signature.
+      </p>
+      <p style="margin-bottom:0">
+        So the honest reading is: nominal margin is very large, and the local peak still
+        clears yield with 1.6 to spare. We took the 1.5 in pin over the 1 in — which the
+        hand calc alone would have passed at 2.86 — precisely because the FEA showed how
+        quickly the local peak grows as diameter drops.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight gridbg">
+  <div class="wrap">
+    <h3 data-reveal>The clevis mount</h3>
+    <p style="max-width:68ch" data-reveal>
+      The clevis mount ties the electric actuator to the third arm — it takes the actuator
+      force plus the chassis weight every time the arm swings. I modelled the 1 in weld-on
+      mount to its catalogue dimensions and loaded it at the full
+      <span class="mono">2,000 lbf</span> static case.
+    </p>
+    <p style="max-width:68ch" data-reveal>
+      Result: under half a millimetre of deflection and a factor of safety around
+      <span class="mono ok">53.5</span> against yield. Enormously overbuilt — which is the
+      right answer for an off-the-shelf part in a load path where failure drops the chassis.
+      The finding that mattered was not the number, it was confirming the mount was not the
+      weak link so attention could go to the arm and the pin.
+    </p>
+
+    <div class="gallery" data-reveal>
+      <button class="shot" data-full="../assets/img/fea-clevis-vonmises.webp"
+              data-caption="Von Mises stress on the clevis mount at 2,000 lbf. Peak stress rings the bore; the body is essentially unloaded.">
+        <img src="../assets/img/fea-clevis-vonmises-thumb.webp"
+             alt="Von Mises stress plot of the clevis mount showing concentration around the bore">
+        <figcaption>Clevis — von Mises stress</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/fea-clevis-displacement.webp"
+              data-caption="Displacement of the clevis mount — under 0.5 mm at full load.">
+        <img src="../assets/img/fea-clevis-displacement-thumb.webp"
+             alt="Displacement plot of the clevis mount">
+        <figcaption>Clevis — displacement</figcaption>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight">
+  <div class="wrap">
+    <h3 data-reveal>System-level results</h3>
+    <p style="max-width:68ch" data-reveal>
+      Across the whole machine, the arms govern — not the fasteners or the mounts. The upper
+      arm at 90° of rotation is where the margin is thinnest, and it is the component the
+      team flagged for redesign.
+    </p>
+
+    <div class="table-scroll" data-reveal>
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Analyst</th>
+            <th>Load case</th>
+            <th class="num">Min FOS</th>
+            <th class="num">Max deflection</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Central pin, 1.5 in</td><td>Grant Leyda</td><td class="mono">9,192.96 lbf shear</td>
+            <td class="num mono ok">1.6</td><td class="num mono">—</td>
+          </tr>
+          <tr>
+            <td>Clevis mount</td><td>Grant Leyda</td><td class="mono">2,000 lbf static</td>
+            <td class="num mono ok">53.5</td><td class="num mono">&lt; 0.5 mm</td>
+          </tr>
+          <tr>
+            <td>Upper arm</td><td>Diana Trujillo</td><td class="mono">1,607 lbf @ 90°</td>
+            <td class="num mono warn">1.32</td><td class="num mono warn">0.662 in</td>
+          </tr>
+          <tr>
+            <td>Lower arm</td><td>Diana Trujillo</td><td class="mono">1,607 lbf @ 90°</td>
+            <td class="num mono ok">high</td><td class="num mono">0.027 in</td>
+          </tr>
+          <tr>
+            <td>Restraining arm</td><td>Aidan Rheay</td><td class="mono">1,957 lbf @ 90° / 180°</td>
+            <td class="num mono">—</td><td class="num mono">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure data-reveal class="figure--wide">
+      <img src="../assets/img/fea-arm-displacement.webp" width="1327" height="758"
+           alt="SolidWorks displacement plot of the arm assembly showing the largest deflection at the unsupported arm tips">
+      <figcaption>
+        Arm assembly displacement. The deflection concentrates at the fork tips where there
+        is no support — <b>0.662 in</b> at worst, against an upper-arm FOS of
+        <b>1.32</b> versus the 1.67 ASD reference. Thickening the arms was the team's
+        recommended fix.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section gridbg" id="build">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow__i">06</span> Manufacturing</div>
+    <h2 data-reveal>From drawing package to running machine</h2>
+    <p class="lede" data-reveal style="--delay:60ms">
+      Spring 2026 was the build. We sourced material and hardware, machined parts at both
+      the University of Arkansas machine shop and JVM's own facility, and assembled and
+      tested the finished system in the sponsor's warehouse.
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;margin-top:2.5rem">
+      <div data-reveal>
+        <h3 style="margin-bottom:1rem">Fabrication</h3>
+        <ul class="timeline">
+          <li class="is-done"><span class="timeline__date">Mar 12</span>McMaster-Carr parts arrive</li>
+          <li class="is-done"><span class="timeline__date">Mar 15</span>Sponsor-machined portion complete</li>
+          <li class="is-done"><span class="timeline__date">Mar 20</span>UARK-machined portion complete</li>
+          <li class="is-done"><span class="timeline__date">Mar 23</span>Assembly begins</li>
+          <li class="is-done"><span class="timeline__date">Mar 27</span>Assembly complete</li>
+        </ul>
+      </div>
+      <div data-reveal style="--delay:80ms">
+        <h3 style="margin-bottom:1rem">Testing</h3>
+        <ul class="timeline">
+          <li class="is-done"><span class="timeline__date">Apr 1</span>Movement testing begins</li>
+          <li class="is-done"><span class="timeline__date">Apr 6</span>Counterweight adjustments</li>
+          <li class="is-done"><span class="timeline__date">Apr 13</span>Full-load testing begins</li>
+          <li class="is-done"><span class="timeline__date">Apr 20</span>Counterweight finalised</li>
+          <li class="is-done"><span class="timeline__date">Apr 24</span>Testing complete, handed over</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="gallery" data-reveal style="margin-top:2.5rem">
+      <button class="shot" data-full="../assets/img/build-photo-team.webp"
+              data-caption="Assembling the frame — University of Arkansas machine shop.">
+        <img src="../assets/img/build-photo-team-thumb.webp"
+             alt="Three team members assembling the steel frame in a machine shop">
+        <figcaption>Frame assembly</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/build-photo-frame.webp"
+              data-caption="The bare weldment standing for the first time before the drive was fitted.">
+        <img src="../assets/img/build-photo-frame-thumb.webp"
+             alt="The bare steel frame of the rotator standing in a warehouse">
+        <figcaption>Bare weldment</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/build-photo-final.webp"
+              data-caption="The completed machine with drive, actuator and control box installed.">
+        <img src="../assets/img/build-photo-final-thumb.webp"
+             alt="The completed chassis rotator with gearmotor and actuator installed">
+        <figcaption>Completed machine</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/build-photo-installed.webp"
+              data-caption="Installed and running on the floor at JVM.">
+        <img src="../assets/img/build-photo-installed-thumb.webp"
+             alt="The finished rotator installed on the production floor">
+        <figcaption>Installed at JVM</figcaption>
+      </button>
+    </div>
+
+    <h3 style="margin-top:3rem" data-reveal>Bill of materials</h3>
+    <p style="max-width:68ch" data-reveal>
+      Twenty-six line items across McMaster-Carr hardware and JVM stock steel, costed per unit
+      and totalling <span class="mono ok">$5,432.33</span> — comfortably inside the $7,500
+      budget, with the gearmotor and actuator as the two dominant costs.
+    </p>
+    <figure data-reveal class="figure--wide">
+      <img src="../assets/img/bom-table.webp" width="1129" height="682" loading="lazy"
+           alt="The complete costed bill of materials, thirty rows, totalling $5,432.33">
+      <figcaption>The delivered BOM, as submitted.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight">
+  <div class="wrap prose">
+    <div class="eyebrow"><span class="eyebrow__i">07</span> Outcome</div>
+    <h2 style="margin-top:0" data-reveal>What worked, and what I'd change</h2>
+
+    <p data-reveal>
+      The machine was delivered, load tested and handed over on schedule. It rotates the
+      chassis 180°, it holds 2,000 lb, it fits the footprint, and it came in $2,068 under
+      budget. Every deadline and deliverable landed on time.
+    </p>
+
+    <div class="callout callout--signal" data-reveal>
+      <div class="callout__label">The honest part</div>
+      <p>
+        Deflection in the arms came in higher than we predicted. The upper arm's factor of
+        safety of 1.32 sits below the 1.67 ASD reference we were benchmarking against — it
+        does not fail, and it has margin over yield, but it is thinner than we wanted.
+      </p>
+      <p style="margin-bottom:0">
+        Our handover recommendation was three-fold: increase the shaft size, redesign the
+        bearing mount, and add a guiderail to take some of the deflection out of the arm.
+        Separately, McMaster lead times ran longer than planned and compressed the
+        fabrication and testing window — on the next one I would order long-lead hardware
+        before the design is fully frozen, and accept a little rework, rather than
+        serialising procurement behind a finished drawing package.
+      </p>
+    </div>
+
+    <p data-reveal>
+      The thing I took away from the pin study specifically: a hand calculation and an FEA
+      that disagree by 4× are not a problem to be resolved by picking the friendlier number.
+      Understanding <em>why</em> they disagree is what told us how the part actually fails,
+      and that is what drove the sizing decision.
+    </p>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight">
+  <div class="wrap">
+    <nav class="pager" data-pager aria-label="More projects"></nav>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h2>Want the full report?</h2>
+        <p class="lede">
+          Happy to walk through the calculations, the drawing package, or the parts of the
+          build that did not go to plan.
+        </p>
+        <a class="btn btn--primary" href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:1rem">Contact</div>
+        <div class="footer__links">
+          <a href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+          <a href="tel:+18176278156">817-627-8156</a>
+          <a href="https://www.linkedin.com/in/grant-leyda" rel="noopener">LinkedIn</a>
+          <a href="../assets/Grant_Leyda_Resume_2026.pdf">Résumé (PDF)</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__meta">
+      <span>© 2026 Grant Leyda</span>
+      <span>Capstone sponsored by JVM / Cram-A-Lot</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+  import { initAll } from '../js/main.js';
+  import { renderPager } from '../js/project-cards.js';
+  import { initViewers } from '../js/viewer3d.js';
+  import { initPinStudy } from '../js/pin-study.js';
+  import { initLightbox, initCompare } from '../js/lightbox.js';
+
+  renderPager('rotator');
+  initAll();
+  initViewers();
+  initPinStudy();
+  initLightbox();
+  initCompare();
+</script>
+
+</body>
+</html>

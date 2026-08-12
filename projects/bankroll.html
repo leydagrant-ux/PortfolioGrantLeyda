@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bankroll — Session Tracking PWA — Grant Leyda</title>
+<meta name="description" content="A multi-user progressive web app with Firebase Auth, Firestore security rules, offline support and schema-migrating CSV import. Built and shipped solo.">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bankroll — Session Tracking PWA">
+<meta property="og:description" content="2,200 lines of vanilla JavaScript, a real auth backend, and security rules verified against the live database.">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2306080b'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='monospace' fill='%2335d6f2'>G</text></svg>">
+<link rel="stylesheet" href="../css/site.css">
+
+<script>
+  try {
+    var t = localStorage.getItem('gl-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+</head>
+
+<body data-base="../">
+
+<nav class="nav">
+  <a class="nav__brand" href="../index.html">Grant Leyda <span>/ ME</span></a>
+  <div class="nav__links">
+    <a href="../index.html#work">Work</a>
+    <a href="rotator.html">Capstone</a>
+    <a href="../assets/Grant_Leyda_Resume_2026.pdf">Résumé</a>
+    <button class="icon-btn" data-theme-toggle aria-label="Switch theme">◑</button>
+  </div>
+</nav>
+
+<!-- ===================================================================== -->
+<header class="case-hero">
+  <div class="case-hero__inner wrap">
+    <a class="backlink" href="../index.html">← All work</a>
+    <div class="hero__kicker">Personal Project · 2026 · Shipped</div>
+    <h1>Bankroll</h1>
+    <p class="lede">
+      A multi-user progressive web app for tracking sessions and running a league
+      leaderboard. Real authentication, per-user data isolation enforced at the database,
+      and an install-to-homescreen experience on iOS. Designed, built and deployed solo.
+    </p>
+
+    <div class="facts">
+      <div><div class="fact__k">Role</div><div class="fact__v">Everything</div></div>
+      <div><div class="fact__k">Stack</div><div class="fact__v">Vanilla JS · Firebase Auth · Firestore</div></div>
+      <div><div class="fact__k">Size</div><div class="fact__v">~2,200 lines</div></div>
+      <div><div class="fact__k">Hosting</div><div class="fact__v">GitHub Pages</div></div>
+      <div><div class="fact__k">Status</div><div class="fact__v"><span class="ok">Live, in daily use</span></div></div>
+    </div>
+
+    <div class="hero__cta" style="margin-top:2rem">
+      <a class="btn btn--primary" href="https://leydagrant-ux.github.io/Bankroll" rel="noopener">
+        Open the live app <span aria-hidden="true">→</span>
+      </a>
+      <a class="btn" href="https://github.com/leydagrant-ux/Bankroll" rel="noopener">Source on GitHub</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================================================================== -->
+<section class="section">
+  <div class="wrap prose">
+
+    <div class="eyebrow"><span class="eyebrow__i">01</span> Why this is here</div>
+    <h2 style="margin-top:0" data-reveal>A mechanical engineer who ships software</h2>
+    <p data-reveal>
+      This is not a class project and it is not a tutorial follow-along. It is a working
+      application with real users, a real backend, and the unglamorous parts done properly —
+      auth, access control, data migration, offline behaviour. I am including it because
+      modern mechanical engineering runs on scripting, data handling and automation, and the
+      fastest way to demonstrate that is to point at something running.
+    </p>
+
+    <div class="eyebrow" style="margin-top:3rem"><span class="eyebrow__i">02</span> What it does</div>
+    <h2 data-reveal>Features</h2>
+
+    <div class="caps" data-reveal style="margin-top:2rem">
+      <div class="cap">
+        <h3>Authentication</h3>
+        <ul>
+          <li class="is-key">Firebase Email/Password accounts</li>
+          <li class="is-key">Per-user private session history</li>
+          <li>Invite-code-only group access</li>
+        </ul>
+      </div>
+      <div class="cap">
+        <h3>Data</h3>
+        <ul>
+          <li class="is-key">Cloud Firestore, live sync</li>
+          <li class="is-key">CSV import / export</li>
+          <li class="is-key">Backward-compatible schema migration</li>
+        </ul>
+      </div>
+      <div class="cap">
+        <h3>Interface</h3>
+        <ul>
+          <li class="is-key">Weekly and all-time leaderboards</li>
+          <li class="is-key">Animated SVG visualisation</li>
+          <li>Reduced-motion accessibility support</li>
+        </ul>
+      </div>
+      <div class="cap">
+        <h3>Delivery</h3>
+        <ul>
+          <li class="is-key">Installable PWA (iOS home screen)</li>
+          <li class="is-key">Service worker with versioned cache</li>
+          <li>Deployed on GitHub Pages</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="eyebrow" style="margin-top:3rem"><span class="eyebrow__i">03</span> The interesting parts</div>
+    <h2 data-reveal>Three problems worth talking about</h2>
+
+    <h3 data-reveal>Security rules are the actual product</h3>
+    <p data-reveal>
+      Client-side checks are decoration; the only thing standing between one user's data and
+      another's is the Firestore rules file. I wrote and published rules enforcing that a
+      user can read and write only documents under their own UID, and that league membership
+      requires a valid invite code rather than merely knowing a group ID. Then I verified
+      them end-to-end against the live backend — signing in as a second account and
+      confirming the reads actually fail — rather than trusting that the rules said what I
+      thought they said.
+    </p>
+
+    <h3 data-reveal>Migrations, because users already have data</h3>
+    <p data-reveal>
+      Once somebody is relying on the app, every schema change is a compatibility problem.
+      The CSV import path handles older column layouts and fills in fields that did not
+      exist when the row was written, so a release never orphans existing data. This is the
+      same discipline as revision-controlling a drawing package: the new version has to
+      account for what was already built to the old one.
+    </p>
+
+    <h3 data-reveal>Service worker caching that does not serve stale code</h3>
+    <p data-reveal>
+      A PWA that caches aggressively will happily serve last week's JavaScript forever. The
+      service worker uses a versioned cache name that is bumped on release, so phones pick
+      up new builds instead of pinning to whatever they installed first.
+    </p>
+
+    <div class="callout" data-reveal>
+      <div class="callout__label">Transferable to engineering work</div>
+      <p style="margin-bottom:0">
+        Access control, versioned data, and graceful handling of the old revision are not
+        web-specific ideas. They are the same concerns as controlled drawings, revision
+        letters and interchangeability — which is most of why building this made me better
+        at the documentation side of the capstone.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight">
+  <div class="wrap">
+    <nav class="pager" data-pager aria-label="More projects"></nav>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h2>Let's talk</h2>
+        <p class="lede">Happy to walk through the code or the design decisions.</p>
+        <a class="btn btn--primary" href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:1rem">Contact</div>
+        <div class="footer__links">
+          <a href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+          <a href="tel:+18176278156">817-627-8156</a>
+          <a href="https://www.linkedin.com/in/grant-leyda" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/leydagrant-ux" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__meta">
+      <span>© 2026 Grant Leyda</span>
+      <span>Bedford, Texas</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+  import { initAll } from '../js/main.js';
+  import { renderPager } from '../js/project-cards.js';
+  renderPager('bankroll');
+  initAll();
+</script>
+
+</body>
+</html>
