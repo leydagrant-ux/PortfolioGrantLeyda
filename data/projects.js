@@ -31,9 +31,9 @@ export const projects = [
     year: '2025–2026',
     tags: ['SolidWorks', 'FEA', 'Manufacturing', 'Hydraulics', 'Team of 6'],
     summary:
-      'A 2,000 lb industrial chassis rotator, taken from a sponsor problem statement all the way ' +
-      'to delivered, load-tested hardware on the customer’s floor. I owned the pin sizing and ' +
-      'clevis mount analyses.',
+      'A 2,000 lb industrial chassis rotator, taken from a sponsor problem statement all the ' +
+      'way to built, load-tested hardware handed over to the sponsor. I owned the pin sizing ' +
+      'and clevis mount analyses.',
     metrics: [
       { value: '2,000', unit: 'lb capacity' },
       { value: '180', unit: '° rotation' },

@@ -319,18 +319,31 @@ export function initHeroStage(modelUrl) {
 
   if (reduced.matches || !webglAvailable()) return;
 
-  // Skip on narrow viewports, where it costs battery for something barely visible. Checked
-  // through matchMedia rather than a one-off innerWidth read, so a window that starts
-  // narrow and is later widened still gets it instead of being permanently empty.
-  const wide = matchMedia('(min-width: 720px)');
-  if (!wide.matches) {
-    wide.addEventListener('change', function once(e) {
-      if (!e.matches) return;
-      wide.removeEventListener('change', once);
+  // Skip on narrow viewports, where this costs battery for something barely visible.
+  //
+  // The width is re-checked rather than read once at load, so a window that starts narrow
+  // and is later widened still gets the background instead of staying permanently empty.
+  // Both a matchMedia listener and a plain resize listener are used: some embedded
+  // browser surfaces resize without ever firing the media-query change event, and a
+  // decorative background is not worth being clever about.
+  const wide = () => innerWidth >= 720 && stage.clientWidth > 0;
+
+  if (!wide()) {
+    const retry = () => {
+      if (!wide()) return;
+      teardown();
       initHeroStage(modelUrl);
-    });
+    };
+    const mq = matchMedia('(min-width: 720px)');
+    const teardown = () => {
+      mq.removeEventListener('change', retry);
+      removeEventListener('resize', retry);
+    };
+    mq.addEventListener('change', retry);
+    addEventListener('resize', retry, { passive: true });
     return;
   }
+
   if (stage.querySelector('canvas')) return; // already running
 
   const canvas = document.createElement('canvas');
