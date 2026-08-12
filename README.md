@@ -19,7 +19,7 @@ blocked on the file protocol.
 ```
 index.html              Home — hero, metrics, project cards, capabilities, about
 projects/
-  rotator.html          Senior capstone case study (the centrepiece)
+  rotator.html          Senior capstone case study (the centerpiece)
   bankroll.html         Software project case study
   _TEMPLATE.html        Starting point for a new project page
 data/projects.js        The project manifest — cards and pager render from this
@@ -72,10 +72,10 @@ projects/rotator.html?selftest=1
 
 **The STLs are part-local.** SolidWorks exported each one with its minimum corner at the
 origin, so they cannot be composed into a full assembly in the browser — the viewer
-recentres each part individually. To show the whole machine in 3D you would need a single
+recenters each part individually. To show the whole machine in 3D you would need a single
 STL exported from the assembly with "Save all components in a single file" checked.
 
-## Licence
+## License
 
 Site code is Grant's. `vendor/three` is three.js, MIT licensed — see
 `vendor/three/LICENSE`. Project imagery and engineering data are from the University of

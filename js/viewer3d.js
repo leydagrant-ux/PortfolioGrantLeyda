@@ -5,8 +5,8 @@
  * it scrolls into view and disposed when it scrolls well clear. That keeps several
  * viewers on one page cheap — only what you can see is running.
  *
- * The STLs are exported from SolidWorks in part-local millimetres, so each part arrives
- * with its minimum corner at the origin. We recentre on load and report the real
+ * The STLs are exported from SolidWorks in part-local millimeters, so each part arrives
+ * with its minimum corner at the origin. We recenter on load and report the real
  * bounding-box dimensions, converted to inches, next to the model.
  */
 
@@ -317,7 +317,21 @@ export function initHeroStage(modelUrl) {
   const stage = document.querySelector('[data-hero-stage]');
   if (!stage) return;
 
-  if (reduced.matches || !webglAvailable() || innerWidth < 720) return;
+  if (reduced.matches || !webglAvailable()) return;
+
+  // Skip on narrow viewports, where it costs battery for something barely visible. Checked
+  // through matchMedia rather than a one-off innerWidth read, so a window that starts
+  // narrow and is later widened still gets it instead of being permanently empty.
+  const wide = matchMedia('(min-width: 720px)');
+  if (!wide.matches) {
+    wide.addEventListener('change', function once(e) {
+      if (!e.matches) return;
+      wide.removeEventListener('change', once);
+      initHeroStage(modelUrl);
+    });
+    return;
+  }
+  if (stage.querySelector('canvas')) return; // already running
 
   const canvas = document.createElement('canvas');
   stage.appendChild(canvas);

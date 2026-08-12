@@ -30,7 +30,7 @@ const DEFAULTS = {
 /** The ASD reference factor of safety the capstone report benchmarks against. */
 const FOS_REF = 1.67;
 
-/** The three diameters actually analysed and FEA-checked in the report. */
+/** The three diameters actually analyzed and FEA-checked in the report. */
 export const VALIDATED = [
   { d: 1.0, fos: 2.856 },
   { d: 1.5, fos: 6.414 },
@@ -80,11 +80,11 @@ function buildChart(svg, state) {
   const bandTop = y(FOS_REF);
   parts.push(
     `<rect x="${VB.l}" y="${bandTop}" width="${plotW}" height="${VB.t + plotH - bandTop}"
-       fill="var(--signal-glow)"/>`,
+       fill="var(--warn-glow)"/>`,
     `<line x1="${VB.l}" y1="${bandTop}" x2="${VB.l + plotW}" y2="${bandTop}"
-       stroke="var(--signal)" stroke-width="1" stroke-dasharray="4 3"/>`,
+       stroke="var(--warn)" stroke-width="1" stroke-dasharray="4 3"/>`,
     `<text x="${VB.l + plotW - 4}" y="${bandTop - 5}" text-anchor="end"
-       fill="var(--signal)" font-size="10" font-family="var(--mono)">ASD reference FOS ${FOS_REF}</text>`,
+       fill="var(--warn)" font-size="10" font-family="var(--mono)">ASD reference FOS ${FOS_REF}</text>`,
   );
 
   // Axes
@@ -129,10 +129,10 @@ function buildChart(svg, state) {
     const d = D_MIN + ((D_MAX - D_MIN) * i) / 120;
     dPath += `${i ? 'L' : 'M'}${x(d).toFixed(2)} ${y(fosAt(d)).toFixed(2)}`;
   }
-  parts.push(`<path d="${dPath}" fill="none" stroke="var(--accent)" stroke-width="2"
+  parts.push(`<path d="${dPath}" fill="none" stroke="var(--ok)" stroke-width="2"
     stroke-linejoin="round" stroke-linecap="round"/>`);
 
-  // The three diameters that were actually analysed. Only meaningful at the report's
+  // The three diameters that were actually analyzed. Only meaningful at the report's
   // own load case, so they fade out once the load slider is moved away from it.
   const atReport = Math.abs(P - DEFAULTS.P) < 1 && Math.abs(t - DEFAULTS.t) < 0.01
     && Math.abs(Su - DEFAULTS.Su) < 1;
@@ -149,8 +149,8 @@ function buildChart(svg, state) {
   const lf = fosAt(state.d);
   parts.push(
     `<line x1="${x(state.d)}" y1="${VB.t}" x2="${x(state.d)}" y2="${VB.t + plotH}"
-       stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>`,
-    `<circle cx="${x(state.d)}" cy="${y(lf)}" r="6" fill="var(--accent)"
+       stroke="var(--ok)" stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>`,
+    `<circle cx="${x(state.d)}" cy="${y(lf)}" r="6" fill="var(--ok)"
        stroke="var(--bg-2)" stroke-width="2"/>`,
   );
 
@@ -185,9 +185,9 @@ function buildGauge(svg) {
   svg.innerHTML = `
     <path d="${arcPath(cx, cy, r, GA_START, GA_END)}" stroke="var(--line-strong)"
       stroke-width="9" fill="none" stroke-linecap="round"/>
-    <path data-gauge-fill d="" stroke="var(--accent)" stroke-width="9" fill="none"
+    <path data-gauge-fill d="" stroke="var(--ok)" stroke-width="9" fill="none"
       stroke-linecap="round"/>
-    <path data-gauge-ref d="" stroke="var(--signal)" stroke-width="2" fill="none"/>`;
+    <path data-gauge-ref d="" stroke="var(--warn)" stroke-width="2" fill="none"/>`;
 }
 
 function paintGauge(svg, fos) {
@@ -201,7 +201,7 @@ function paintGauge(svg, fos) {
 
   const fill = svg.querySelector('[data-gauge-fill]');
   fill.setAttribute('d', frac < 0.002 ? '' : arcPath(cx, cy, r, GA_START, to));
-  fill.setAttribute('stroke', fos < FOS_REF ? 'var(--signal)' : 'var(--accent)');
+  fill.setAttribute('stroke', fos < FOS_REF ? 'var(--warn)' : 'var(--ok)');
 
   // Tick showing where the ASD reference sits on the dial.
   const refDeg = GA_START + span * (FOS_REF / GAUGE_MAX);

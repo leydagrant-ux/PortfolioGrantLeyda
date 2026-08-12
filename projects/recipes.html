@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recipe Book — Grant Leyda</title>
+<meta name="description" content="A Python and Flask application that turns a cooking video into a structured, searchable recipe using transcript extraction and a language model, stored in a single portable database.">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Recipe Book — Grant Leyda">
+<meta property="og:description" content="Video to structured recipe: transcript extraction, LLM parsing, and a single-file library designed to outlive the source post.">
+<meta property="og:image" content="../assets/img/recipes-cover.webp">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2306080b'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='monospace' fill='%23e8455c'>G</text></svg>">
+<link rel="stylesheet" href="../css/site.css">
+
+<script>
+  try {
+    var t = localStorage.getItem('gl-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+</head>
+
+<body data-base="../">
+
+<nav class="nav">
+  <a class="nav__brand" href="../index.html">Grant Leyda <span>/ ME</span></a>
+  <div class="nav__links">
+    <a href="../index.html#engineering">Engineering</a>
+    <a href="../index.html#software">Software</a>
+    <a href="../assets/Grant_Leyda_Resume_2026.pdf">Résumé</a>
+    <button class="icon-btn" data-theme-toggle aria-label="Switch theme">◑</button>
+  </div>
+</nav>
+
+<!-- ===================================================================== -->
+<header class="case-hero">
+  <div class="case-hero__inner wrap">
+    <a class="backlink" href="../index.html#software">← All work</a>
+    <div class="hero__kicker">Personal Project · 2026</div>
+    <h1>Recipe Book</h1>
+    <p class="lede">
+      An application that turns a cooking video into a structured, searchable recipe. It
+      pulls the spoken transcript, has a language model extract the ingredients and
+      numbered steps, and stores the result in a single portable database — images
+      included — so the library outlives the original post.
+    </p>
+
+    <div class="facts">
+      <div><div class="fact__k">Role</div><div class="fact__v">Sole designer and developer</div></div>
+      <div><div class="fact__k">Backend</div><div class="fact__v">Python · Flask · SQLite</div></div>
+      <div><div class="fact__k">Extraction</div><div class="fact__v">Transcript API · Claude</div></div>
+      <div><div class="fact__k">Entry point</div><div class="fact__v">iOS share-sheet shortcut</div></div>
+      <div><div class="fact__k">Status</div><div class="fact__v">Working; source available</div></div>
+    </div>
+
+    <div class="hero__cta" style="margin-top:2rem">
+      <a class="btn btn--primary" href="https://github.com/leydagrant-ux/Recipe-Book" rel="noopener">
+        Source on GitHub <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================================================================== -->
+<section class="section">
+  <div class="wrap prose">
+
+    <div class="eyebrow"><span class="eyebrow__i">01</span> The problem</div>
+    <h2 style="margin-top:0" data-reveal>Saved videos are not a recipe collection</h2>
+    <p data-reveal>
+      Cooking videos are a genuinely useful source of recipes and a genuinely terrible way
+      to store them. The instructions are spoken rather than written, quantities go by too
+      quickly to note, and a saved post is not searchable. Worse, a bookmarked video is
+      only as permanent as the account that posted it.
+    </p>
+    <p data-reveal>
+      I wanted the underlying recipe as text I own: searchable by ingredient, readable in
+      the kitchen, and still there in two years.
+    </p>
+
+    <div class="eyebrow" style="margin-top:3rem"><span class="eyebrow__i">02</span> How it works</div>
+    <h2 data-reveal>Four stages</h2>
+
+    <div class="table-scroll" data-reveal>
+      <table>
+        <thead>
+          <tr><th>Stage</th><th>What happens</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Capture</b></td><td>A share-sheet shortcut posts the video URL to the API — no app switching.</td></tr>
+          <tr><td><b>Transcribe</b></td><td>The service returns the spoken transcript plus the caption text.</td></tr>
+          <tr><td><b>Extract</b></td><td>A language model turns that prose into a structured recipe: title, quantified ingredients, numbered steps, notes on servings and substitutions.</td></tr>
+          <tr><td><b>Store</b></td><td>The recipe and the cover image are written to SQLite and indexed for search.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="eyebrow" style="margin-top:3rem"><span class="eyebrow__i">03</span> Design decisions</div>
+    <h2 data-reveal>Three choices worth explaining</h2>
+
+    <h3 data-reveal>Store the image bytes, not the link</h3>
+    <p data-reveal>
+      The obvious implementation saves the thumbnail URL. That quietly fails: those URLs
+      are signed and expire, and creators delete posts. A library built on links degrades
+      to blank tiles over a matter of months. The application downloads the image at save
+      time and writes the bytes into the database, so a saved recipe does not depend on
+      anything outside the file.
+    </p>
+
+    <h3 data-reveal>Make the whole library one file</h3>
+    <p data-reveal>
+      Everything — recipes, metadata and images — lives in a single SQLite file. Backing up
+      the library is copying one file, and moving it between machines needs no export step.
+      For a personal-scale application, that portability is worth far more than the
+      performance a heavier database would buy.
+    </p>
+
+    <h3 data-reveal>Never pay twice for the same video</h3>
+    <p data-reveal>
+      Transcription and extraction both cost money per call, so saving a video that is
+      already in the library returns the stored copy rather than reprocessing it. Requests
+      are validated before any paid call is made, and a video with no readable instructions
+      is rejected outright instead of being half-saved.
+    </p>
+
+    <div class="callout" data-reveal>
+      <div class="callout__label">Error handling</div>
+      <p style="margin-bottom:0">
+        Every failure mode returns a specific, correct HTTP status rather than a generic
+        error: a malformed link, a missing credential, a video with no usable text, an
+        upstream service outage, and a transcription timeout are all distinguishable by the
+        response. That distinction is what makes the shortcut on the phone able to tell the
+        user something useful when a save does not work.
+      </p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:3rem"><span class="eyebrow__i">04</span> Why it belongs here</div>
+    <h2 data-reveal>Relevance to engineering work</h2>
+    <p data-reveal>
+      Underneath the subject matter this is a data-pipeline problem: take an unstructured input,
+      extract the fields that matter, validate them, and store the result in a form that
+      stays usable over time. The same shape appears in test-data reduction, inspection
+      records and any workflow that turns measurements into a report.
+    </p>
+    <p data-reveal>
+      The durability decision is the one I would defend hardest in either context. Choosing
+      to store the bytes rather than the reference is the same instinct as keeping a
+      controlled copy of a drawing rather than a link to wherever it happened to live.
+    </p>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight">
+  <div class="wrap">
+    <nav class="pager" data-pager aria-label="More projects"></nav>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h2>Let's talk</h2>
+        <p class="lede">I am happy to walk through the code or the design decisions.</p>
+        <a class="btn btn--primary" href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:1rem">Contact</div>
+        <div class="footer__links">
+          <a href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+          <a href="tel:+18176278156">817-627-8156</a>
+          <a href="https://www.linkedin.com/in/grant-leyda" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/leydagrant-ux" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__meta">
+      <span>© 2026 Grant Leyda</span>
+      <span>Bedford, Texas</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+  import { initAll } from '../js/main.js';
+  import { renderPager } from '../js/project-cards.js';
+  renderPager('recipes');
+  initAll();
+</script>
+
+</body>
+</html>

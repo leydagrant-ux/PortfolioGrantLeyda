@@ -22,19 +22,29 @@
      --bg, so it clears WCAG AA with room to spare. Don't darken it. */
   --ink-3:         #758697;
 
-  --accent:        #35d6f2;
-  --accent-2:      #0ea5c4;
-  --accent-ink:    #04212a;
-  --accent-glow:   rgba(53, 214, 242, .18);
-  --accent-line:   rgba(53, 214, 242, .32);
+  /* Arkansas cardinal, carried over from Grant's printed portfolio. Brand only —
+     never used to mean "pass", which is what --ok is for. */
+  --accent:        #e8455c;
+  --accent-2:      #c8102e;
+  --accent-ink:    #ffffff;
+  --accent-glow:   rgba(232, 69, 92, .18);
+  --accent-line:   rgba(232, 69, 92, .34);
 
-  /* Reserved exclusively for stress / factor-of-safety warnings. */
-  --signal:        #ff9f45;
-  --signal-2:      #ff7a1a;
-  --signal-glow:   rgba(255, 159, 69, .16);
+  /* Semantic pair, deliberately independent of the brand colour. A red accent must not
+     double as the "safe" state on a factor-of-safety gauge. */
+  --ok:            #3ecf8e;
+  --ok-glow:       rgba(62, 207, 142, .16);
+  --warn:          #f0a93c;
+  --warn-glow:     rgba(240, 169, 60, .16);
 
-  --grid:          rgba(120, 160, 190, .07);
-  --grid-strong:   rgba(120, 160, 190, .13);
+  /* Kept as aliases so the stress callouts read the same as the gauge. */
+  --signal:        var(--warn);
+  --signal-2:      #e08d15;
+  --signal-glow:   var(--warn-glow);
+
+  --grid:          rgba(150, 170, 195, .07);
+  --grid-strong:   rgba(150, 170, 195, .13);
+  --blueprint:     rgba(186, 205, 224, .16);
 
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
@@ -72,18 +82,25 @@
   /* Measured 4.8:1 on the light --bg. The obvious #6f8296 lands at 3.65 and fails AA. */
   --ink-3:         #5d6e7e;
 
-  --accent:        #0284a8;
-  --accent-2:      #026e8c;
+  /* The deeper cardinal reads better against a light ground. */
+  --accent:        #9d2235;
+  --accent-2:      #7d1a2a;
   --accent-ink:    #ffffff;
-  --accent-glow:   rgba(2, 132, 168, .12);
-  --accent-line:   rgba(2, 132, 168, .30);
+  --accent-glow:   rgba(157, 34, 53, .12);
+  --accent-line:   rgba(157, 34, 53, .30);
 
-  --signal:        #c2560a;
-  --signal-2:      #a34505;
-  --signal-glow:   rgba(194, 86, 10, .12);
+  --ok:            #0f7a52;
+  --ok-glow:       rgba(15, 122, 82, .12);
+  --warn:          #9a5b00;
+  --warn-glow:     rgba(154, 91, 0, .13);
+
+  --signal:        var(--warn);
+  --signal-2:      #7d4900;
+  --signal-glow:   var(--warn-glow);
 
   --grid:          rgba(40, 80, 110, .07);
   --grid-strong:   rgba(40, 80, 110, .14);
+  --blueprint:     rgba(40, 72, 105, .17);
 
   --shadow-1: 0 1px 2px rgba(20,40,60,.08);
   --shadow-2: 0 8px 30px rgba(20,40,60,.10);
@@ -214,6 +231,83 @@ section { position: relative; }
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 30%, transparent 78%);
   pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   4b. Blueprint field
+   A drafting sheet behind the hero: fine grid, a heavier index grid, and the
+   dimension linework drawn in blueprint.svg. Sharp at any size because it is all
+   vector — no upscaled screenshots.
+   -------------------------------------------------------------------------- */
+
+.blueprint {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Two superimposed grids: 28px fine, 140px index — the way drafting paper reads. */
+.blueprint::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(var(--grid-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px);
+  background-size: 28px 28px, 28px 28px, 140px 140px, 140px 140px;
+  mask-image: radial-gradient(ellipse 95% 85% at 62% 40%, #000 20%, transparent 75%);
+}
+
+/* A cardinal wash bleeding in from the right, echoing the printed portfolio. */
+.blueprint::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 52% 62% at 88% 32%, var(--accent-glow), transparent 68%),
+    linear-gradient(to bottom, transparent 62%, var(--bg) 98%);
+}
+
+.blueprint__draw {
+  position: absolute;
+  top: 50%;
+  right: -6%;
+  translate: 0 -50%;
+  width: min(78vw, 1000px);
+  color: var(--blueprint);
+  opacity: .9;
+}
+@media (max-width: 900px) {
+  .blueprint__draw { right: -30%; width: 140vw; opacity: .5; }
+}
+
+.blueprint__draw [data-bp-stroke] {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.blueprint__draw [data-bp-accent] { color: var(--accent); opacity: .5; }
+.blueprint__draw text {
+  fill: currentColor;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .06em;
+}
+
+/* The linework draws itself once on load. */
+@media (prefers-reduced-motion: no-preference) {
+  .blueprint__draw [data-bp-stroke] {
+    stroke-dasharray: 2400;
+    stroke-dashoffset: 2400;
+    animation: bp-draw 2.6s var(--ease-out) forwards;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+  @keyframes bp-draw { to { stroke-dashoffset: 0; } }
 }
 
 /* --------------------------------------------------------------------------
@@ -699,8 +793,8 @@ thead th {
 tbody tr:last-child td { border-bottom: 0; }
 tbody tr:hover { background: var(--bg-2); }
 td.num, th.num { text-align: right; }
-.ok   { color: var(--accent); }
-.warn { color: var(--signal); }
+.ok   { color: var(--ok); }
+.warn { color: var(--warn); }
 
 /* --------------------------------------------------------------------------
    13. Figures, gallery, lightbox
@@ -1012,10 +1106,10 @@ details.adv > div { display: flex; flex-direction: column; gap: var(--s3); paddi
   font-family: var(--mono); font-variant-numeric: tabular-nums;
   font-size: 2.2rem; font-weight: 650; line-height: 1;
   letter-spacing: -.04em;
-  color: var(--accent);
+  color: var(--ok);
   transition: color .35s var(--ease);
 }
-.gauge[data-state="warn"] .gauge__num { color: var(--signal); }
+.gauge[data-state="warn"] .gauge__num { color: var(--warn); }
 .gauge__cap {
   font-family: var(--mono); font-size: .64rem; letter-spacing: .16em;
   text-transform: uppercase; color: var(--ink-3); margin-top: .3rem;
@@ -1041,9 +1135,9 @@ details.adv > div { display: flex; flex-direction: column; gap: var(--s3); paddi
   margin-top: .7rem;
 }
 .chart__legend span { display: inline-flex; align-items: center; gap: .4rem; }
-.swatch { width: 14px; height: 2px; background: var(--accent); }
+.swatch { width: 14px; height: 2px; background: var(--ok); }
 .swatch--dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); }
-.swatch--band { width: 14px; height: 8px; background: var(--signal-glow); border: 1px solid var(--signal); }
+.swatch--band { width: 14px; height: 8px; background: var(--warn-glow); border: 1px solid var(--warn); }
 
 /* --------------------------------------------------------------------------
    17. Timeline

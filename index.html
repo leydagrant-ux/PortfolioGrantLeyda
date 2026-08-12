@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Grant Leyda — Mechanical Engineer</title>
-<meta name="description" content="Mechanical engineer, aerospace concentration. Senior capstone: a 2,000 lb industrial chassis rotator designed, analysed, built and delivered. SolidWorks, FEA, manufacturing.">
+<meta name="description" content="Mechanical engineer with an aerospace concentration. Senior capstone: a 2,000 lb industrial chassis rotator designed, analyzed, manufactured and delivered. SolidWorks, FEA, and manufacturing.">
 <meta name="author" content="Grant Leyda">
 
 <meta property="og:type" content="website">
@@ -29,8 +29,8 @@
 <nav class="nav">
   <a class="nav__brand" href="index.html">Grant Leyda <span>/ ME</span></a>
   <div class="nav__links">
-    <a href="#work">Work</a>
-    <a href="#capabilities">Capabilities</a>
+    <a href="#engineering">Engineering</a>
+    <a href="#software">Software</a>
     <a href="#about">About</a>
     <a href="assets/Grant_Leyda_Resume_2026.pdf">Résumé</a>
     <button class="icon-btn" data-theme-toggle aria-label="Switch theme">◑</button>
@@ -39,28 +39,60 @@
 
 <!-- ===================================================================== -->
 <header class="hero">
+  <!-- Blueprint field: drafting grid plus dimension linework, all vector. -->
+  <div class="blueprint" aria-hidden="true">
+    <svg class="blueprint__draw" viewBox="0 0 1000 700" fill="none"
+         xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <!-- bolt circle -->
+      <circle data-bp-stroke style="--i:0" cx="560" cy="330" r="228"/>
+      <circle data-bp-stroke style="--i:1" cx="560" cy="330" r="150" stroke-dasharray="10 7"/>
+      <circle data-bp-stroke style="--i:2" cx="560" cy="330" r="52"/>
+      <!-- center marks -->
+      <path data-bp-stroke style="--i:2" d="M560 66V594M296 330h528"/>
+      <!-- bolt holes on the circle -->
+      <circle data-bp-stroke style="--i:3" cx="560" cy="180" r="17"/>
+      <circle data-bp-stroke style="--i:3" cx="690" cy="405" r="17"/>
+      <circle data-bp-stroke style="--i:3" cx="430" cy="405" r="17"/>
+      <!-- overall dimension, bottom -->
+      <path data-bp-stroke style="--i:4" d="M332 636h456M332 622v28M788 622v28"/>
+      <path data-bp-stroke style="--i:4" d="M332 636l22-7v14zM788 636l-22-7v14z" fill="currentColor"/>
+      <text x="497" y="628" text-anchor="middle">8 ft</text>
+      <!-- radius leader -->
+      <path data-bp-stroke style="--i:5" d="M560 330l161-161 96 0"/>
+      <text x="726" y="162">R 228</text>
+      <!-- section marker -->
+      <path data-bp-stroke style="--i:6" d="M150 210h96M150 210v-42M150 168l-8 12h16z" fill="currentColor"/>
+      <text x="120" y="240">A</text>
+      <!-- angle callout, cardinal -->
+      <path data-bp-stroke data-bp-accent style="--i:7"
+            d="M560 330l186 96M560 330l186-96M700 306a160 160 0 010 48"/>
+      <text data-bp-accent x="762" y="342">180°</text>
+    </svg>
+  </div>
+
   <div class="hero__stage" data-hero-stage aria-hidden="true"></div>
 
   <div class="hero__inner wrap">
     <div class="hero__grid">
       <div>
-        <div class="hero__kicker">Bedford, TX &nbsp;·&nbsp; Open to offers</div>
+        <div class="hero__kicker">Bedford, Texas &nbsp;·&nbsp; Open to opportunities</div>
         <h1>
           Grant Leyda
           <em>Mechanical Engineer — Aerospace Concentration</em>
         </h1>
         <p class="hero__lede">
-          I design things that have to hold. My senior capstone was a
-          <strong>2,000&nbsp;lb industrial chassis rotator</strong> — taken from a sponsor's
-          problem statement through FEA and a costed BOM to hardware that now runs on their
-          floor. Everything on this site is that real work, with the numbers left in.
+          I am a mechanical engineer focused on structural design and analysis. My work runs
+          from requirements and CAD through finite element analysis and a costed bill of
+          materials to manufactured, load-tested hardware — most recently a
+          <strong>2,000&nbsp;lb industrial chassis rotator</strong> now in service at a
+          commercial manufacturer.
         </p>
         <div class="hero__cta">
           <a class="btn btn--primary" href="projects/rotator.html">
-            Open the capstone <span aria-hidden="true">→</span>
+            View the capstone <span aria-hidden="true">→</span>
           </a>
           <a class="btn" href="assets/Grant_Leyda_Resume_2026.pdf">Résumé (PDF)</a>
-          <a class="btn btn--ghost" href="mailto:leydagrant@gmail.com">Email me</a>
+          <a class="btn btn--ghost" href="mailto:leydagrant@gmail.com">Contact me</a>
         </div>
       </div>
 
@@ -103,21 +135,38 @@
 </section>
 
 <!-- ===================================================================== -->
-<section class="section gridbg" id="work">
+<section class="section gridbg" id="engineering">
   <div class="wrap">
-    <div class="eyebrow"><span class="eyebrow__i">01</span> Selected work</div>
-    <h2 data-reveal>Projects, with the engineering left in</h2>
+    <div class="eyebrow"><span class="eyebrow__i">01</span> Engineering</div>
+    <h2 data-reveal>Design, analysis and manufacturing</h2>
     <p class="lede" data-reveal style="--delay:60ms">
-      Two case studies. One is 2,000 pounds of steel; the other is 2,200 lines of
-      JavaScript. Both were taken all the way to something that actually works.
+      Hardware taken from a written requirement through to a delivered, tested machine.
+      The calculations and the bill of materials are included, not summarized.
     </p>
 
-    <div class="tags" data-project-filter style="margin-top:2rem" hidden></div>
-
-    <div class="cards cards--split" data-projects style="margin-top:2.5rem">
+    <div class="cards cards--split" data-projects="engineering" style="margin-top:2.5rem">
       <noscript>
         <p><a href="projects/rotator.html">Cram-A-Lot Chassis Rotator — senior capstone</a></p>
-        <p><a href="projects/bankroll.html">Bankroll — session tracking PWA</a></p>
+      </noscript>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section" id="software">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow__i">02</span> Software</div>
+    <h2 data-reveal>Applications I designed and shipped</h2>
+    <p class="lede" data-reveal style="--delay:60ms">
+      Personal projects built end to end, including authentication, data storage and
+      deployment. Engineering increasingly depends on scripting and automation, and these
+      are the clearest evidence that I can build that tooling as well as use it.
+    </p>
+
+    <div class="cards cards--split" data-projects="software" style="margin-top:2.5rem">
+      <noscript>
+        <p><a href="projects/bankroll.html">Bankroll — session tracking web app</a></p>
+        <p><a href="projects/recipes.html">Recipe Book — video to structured recipe</a></p>
       </noscript>
     </div>
   </div>
@@ -126,10 +175,10 @@
 <!-- ===================================================================== -->
 <section class="section" id="capabilities">
   <div class="wrap">
-    <div class="eyebrow"><span class="eyebrow__i">02</span> Capabilities</div>
-    <h2 data-reveal>What I actually reach for</h2>
+    <div class="eyebrow"><span class="eyebrow__i">03</span> Capabilities</div>
+    <h2 data-reveal>Tools and methods I work in</h2>
     <p class="lede" data-reveal style="--delay:60ms">
-      Highlighted items are ones I used to deliver real hardware, not just coursework.
+      Highlighted items are those I have used to deliver production hardware, not only coursework.
     </p>
 
     <div class="caps" data-reveal style="margin-top:2.5rem">
@@ -137,7 +186,7 @@
         <h3>CAD &amp; design</h3>
         <ul>
           <li class="is-key">SolidWorks — CSWA certified</li>
-          <li class="is-key">Assembly modelling &amp; mates</li>
+          <li class="is-key">Assembly modeling &amp; mates</li>
           <li class="is-key">Exploded views &amp; drawing packages</li>
           <li>Autodesk Inventor</li>
           <li>3D printing / rapid prototyping</li>
@@ -148,7 +197,7 @@
         <ul>
           <li class="is-key">FEA — static structural</li>
           <li class="is-key">Von Mises, displacement, FOS</li>
-          <li class="is-key">Hand calcs: shear, bearing, von Mises</li>
+          <li class="is-key">Hand calculations: shear, bearing, von Mises</li>
           <li>Fluid flow simulation (CFD)</li>
           <li>Tolerance stack-up</li>
         </ul>
@@ -164,7 +213,7 @@
         </ul>
       </div>
       <div class="cap">
-        <h3>Software &amp; comms</h3>
+        <h3>Software &amp; communication</h3>
         <ul>
           <li class="is-key">MATLAB</li>
           <li class="is-key">JavaScript / web apps</li>
@@ -180,16 +229,16 @@
 <!-- ===================================================================== -->
 <section class="section gridbg" id="about">
   <div class="wrap">
-    <div class="eyebrow"><span class="eyebrow__i">03</span> About</div>
+    <div class="eyebrow"><span class="eyebrow__i">04</span> About</div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:3rem">
       <div data-reveal>
-        <h2>Engineer who can talk to the customer</h2>
+        <h2>Engineering depth, and the communication to carry it</h2>
         <p style="margin-top:1.5rem">
           I graduated from the University of Arkansas in May 2026 with a B.S. in Mechanical
           Engineering and an aerospace concentration. My strongest work is structural:
-          taking a load case, sizing the thing that carries it, proving it with both hand
-          calculations and FEA, and then actually building it.
+          taking a load case, sizing the member that carries it, verifying it with both hand
+          calculations and FEA, and then building it.
         </p>
         <p>
           On the capstone I owned two of the critical component analyses — the central pin
@@ -198,12 +247,11 @@
           sponsor's facility, and assembling the finished machine in their warehouse.
         </p>
         <p>
-          Before engineering paid the bills, sales did. Two years of commission solar sales
-          at Sunder Energy and LGCY Power taught me to explain a technical product to
-          somebody who did not ask to be taught, handle the objection honestly, and keep
-          the relationship after the sale. That is not a detour from engineering — it is
-          why I am comfortable in front of a sponsor, and why I am equally interested in
-          design roles and in sales-engineering ones.
+          I also spent two years in commission solar sales at Sunder Energy and LGCY Power.
+          That work taught me to explain a technical product to an audience that did not ask
+          for a lesson, to address objections honestly, and to maintain the relationship
+          after the sale. It is a large part of why I am comfortable presenting to a sponsor,
+          and why I am equally interested in design roles and in sales engineering.
         </p>
       </div>
 
@@ -244,7 +292,7 @@
       <div>
         <h2>Let's talk</h2>
         <p class="lede">
-          I'm actively interviewing. The fastest way to reach me is email.
+          I am actively interviewing, and email is the fastest way to reach me.
         </p>
         <a class="btn btn--primary" href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
       </div>
@@ -263,7 +311,8 @@
         <div class="eyebrow" style="margin-bottom:1rem">Work</div>
         <div class="footer__links">
           <a href="projects/rotator.html">Chassis Rotator</a>
-          <a href="projects/bankroll.html">Bankroll PWA</a>
+          <a href="projects/bankroll.html">Bankroll</a>
+          <a href="projects/recipes.html">Recipe Book</a>
           <a href="assets/Grant_Leyda_Resume_2026.pdf">Résumé (PDF)</a>
         </div>
       </div>

@@ -1,5 +1,5 @@
 /**
- * Site-wide behaviour: theme, nav state, scroll reveals, count-ups, range fills.
+ * Site-wide behavior: theme, nav state, scroll reveals, count-ups, range fills.
  *
  * Everything here degrades to a sensible static state. Nothing on the page depends on
  * JavaScript to be readable — if this file fails to load the site is still complete.

@@ -9,6 +9,7 @@
  *
  * Fields
  *   slug      unique id, also used for prev/next ordering
+ *   category  'engineering' or 'software' — picks which section on the home page
  *   title     card and pager title
  *   kicker    small mono line above the title
  *   year      shown in the card spec line
@@ -18,12 +19,13 @@
  *   cover     path relative to the site root
  *   alt       alt text for the cover image
  *   href      page for this project, relative to the site root
- *   featured  true puts it in the wide hero card slot
+ *   featured  true puts it in the wide hero card slot within its section
  */
 
 export const projects = [
   {
     slug: 'rotator',
+    category: 'engineering',
     title: 'Cram-A-Lot Chassis Rotator',
     kicker: 'Senior Capstone · Sponsored by JVM / Cram-A-Lot',
     year: '2025–2026',
@@ -43,6 +45,7 @@ export const projects = [
   },
   {
     slug: 'bankroll',
+    category: 'software',
     title: 'Bankroll — Session Tracking PWA',
     kicker: 'Personal Project · Shipped and live',
     year: '2026',
@@ -56,8 +59,29 @@ export const projects = [
       { value: '100', unit: '% uptime' },
     ],
     cover: 'assets/img/bankroll-cover.webp',
-    alt: 'Screenshot of the Bankroll progressive web app leaderboard',
+    alt: 'Title card for the Bankroll project, showing a rising session-total curve',
     href: 'projects/bankroll.html',
+    featured: true,
+  },
+  {
+    slug: 'recipes',
+    category: 'software',
+    title: 'Recipe Book',
+    kicker: 'Personal Project · Source available',
+    year: '2026',
+    tags: ['Python', 'Flask', 'SQLite', 'LLM API', 'iOS Shortcut'],
+    summary:
+      'Turns a cooking video into a structured, searchable recipe. Pulls the spoken ' +
+      'transcript, has a language model extract ingredients and numbered steps, and stores ' +
+      'the result — images included — so the library survives the original post ' +
+      'being deleted.',
+    metrics: [
+      { value: '20–60', unit: 's per save' },
+      { value: '1', unit: 'file library' },
+    ],
+    cover: 'assets/img/recipes-cover.webp',
+    alt: 'Title card for the Recipe Book project',
+    href: 'projects/recipes.html',
     featured: false,
   },
 ];
@@ -65,8 +89,8 @@ export const projects = [
 /** Ordered slugs, for prev/next paging between case studies. */
 export const order = projects.map((p) => p.slug);
 
-/** Look up the neighbours of a slug. Returns {prev, next}, either may be null. */
-export function neighbours(slug) {
+/** Look up the neighbors of a slug. Returns {prev, next}, either may be null. */
+export function neighbors(slug) {
   const i = order.indexOf(slug);
   if (i === -1) return { prev: null, next: null };
   return {

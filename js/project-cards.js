@@ -5,7 +5,7 @@
  * the manifest is genuinely all it takes to make it appear across the site.
  */
 
-import { projects, neighbours } from '../data/projects.js';
+import { projects, neighbors } from '../data/projects.js';
 
 /** Pages inside projects/ set data-base="../" so asset paths resolve from anywhere. */
 const base = () => document.body.dataset.base || './';
@@ -42,15 +42,31 @@ function cardHTML(p) {
     </a>`;
 }
 
-/** Renders every project into [data-projects], featured first. */
+/**
+ * Renders projects into every [data-projects] container on the page.
+ *
+ * The attribute's value selects a category — `data-projects="software"` takes only the
+ * software entries. Leave it empty to take everything. Featured projects sort to the top
+ * of their own section.
+ */
 export function renderCards() {
-  const host = document.querySelector('[data-projects]');
-  if (!host) return;
+  const hosts = document.querySelectorAll('[data-projects]');
+  if (!hosts.length) return;
 
-  const sorted = [...projects].sort((a, b) => Number(b.featured) - Number(a.featured));
-  host.innerHTML = sorted.map(cardHTML).join('');
+  hosts.forEach((host) => {
+    const want = host.dataset.projects;
+    const list = [...projects]
+      .filter((p) => !want || p.category === want)
+      .sort((a, b) => Number(b.featured) - Number(a.featured));
 
-  renderFilter(host, sorted);
+    if (!list.length) {
+      host.closest('section')?.setAttribute('hidden', '');
+      return;
+    }
+
+    host.innerHTML = list.map(cardHTML).join('');
+    renderFilter(host, list);
+  });
 }
 
 /**
@@ -58,7 +74,9 @@ export function renderCards() {
  * when there are too few projects for filtering to be useful.
  */
 function renderFilter(host, list) {
-  const bar = document.querySelector('[data-project-filter]');
+  // Scoped to the same section as the cards it filters, so two sections can each carry
+  // their own bar without fighting over one global element.
+  const bar = host.closest('section')?.querySelector('[data-project-filter]');
   if (!bar) return;
 
   // Filtering two cards is pointless, so the bar stays hidden until there are enough
@@ -97,7 +115,7 @@ export function renderPager(slug) {
   if (!host) return;
 
   const b = base();
-  const { prev, next } = neighbours(slug);
+  const { prev, next } = neighbors(slug);
   const parts = [];
 
   if (prev) {

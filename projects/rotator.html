@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cram-A-Lot Chassis Rotator — Grant Leyda</title>
-<meta name="description" content="Senior capstone: a 2,000 lb industrial chassis rotator designed, analysed, manufactured and delivered. Includes an interactive pin sizing study built from the original hand calculations.">
+<meta name="description" content="Senior capstone: a 2,000 lb industrial chassis rotator designed, analyzed, manufactured and delivered. Includes an interactive pin sizing study built from the original hand calculations.">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cram-A-Lot Chassis Rotator — Grant Leyda">
@@ -27,7 +27,7 @@
 <nav class="nav">
   <a class="nav__brand" href="../index.html">Grant Leyda <span>/ ME</span></a>
   <div class="nav__links">
-    <a href="../index.html#work">Work</a>
+    <a href="../index.html#engineering">Engineering</a>
     <a href="#analysis">Analysis</a>
     <a href="#study">Pin study</a>
     <a href="#build">Build</a>
@@ -42,7 +42,7 @@
   </div>
 
   <div class="case-hero__inner wrap">
-    <a class="backlink" href="../index.html">← All work</a>
+    <a class="backlink" href="../index.html#engineering">← All work</a>
     <div class="hero__kicker">Senior Capstone · MEEG 41902 · Fall 2025 – Spring 2026</div>
     <h1>Cram-A-Lot Chassis Rotator</h1>
     <p class="lede">
@@ -292,7 +292,7 @@
       </p>
       <p style="margin-bottom:0">
         The upper-arm analysis was Diana Trujillo's and the restraining-arm analysis was
-        Aidan Rheay's; both are summarised here because the system-level story does not make
+        Aidan Rheay's; both are summarized here because the system-level story does not make
         sense without them. Full team: Cole McCallum, Cooper Ulrich, Maverick Wynn,
         Diana Trujillo, Aidan Rheay and myself.
       </p>
@@ -425,10 +425,10 @@
           </div>
 
           <div class="chart">
-            <svg data-chart role="img" aria-label="Chart of factor of safety against pin diameter, with the three analysed diameters marked"></svg>
+            <svg data-chart role="img" aria-label="Chart of factor of safety against pin diameter, with the three analyzed diameters marked"></svg>
             <div class="chart__legend">
               <span><i class="swatch"></i> Hand calculation</span>
-              <span><i class="swatch swatch--dot"></i> Diameters analysed in the report</span>
+              <span><i class="swatch swatch--dot"></i> Diameters analyzed in the report</span>
               <span><i class="swatch swatch--band"></i> Below ASD reference FOS 1.67</span>
             </div>
           </div>
@@ -467,16 +467,16 @@
     <h3 data-reveal>The clevis mount</h3>
     <p style="max-width:68ch" data-reveal>
       The clevis mount ties the electric actuator to the third arm — it takes the actuator
-      force plus the chassis weight every time the arm swings. I modelled the 1 in weld-on
-      mount to its catalogue dimensions and loaded it at the full
+      force plus the chassis weight every time the arm swings. I modeled the 1 in weld-on
+      mount to its catalog dimensions and loaded it at the full
       <span class="mono">2,000 lbf</span> static case.
     </p>
     <p style="max-width:68ch" data-reveal>
-      Result: under half a millimetre of deflection and a factor of safety around
-      <span class="mono ok">53.5</span> against yield. Enormously overbuilt — which is the
-      right answer for an off-the-shelf part in a load path where failure drops the chassis.
-      The finding that mattered was not the number, it was confirming the mount was not the
-      weak link so attention could go to the arm and the pin.
+      The result was under half a millimeter of deflection and a factor of safety of roughly
+      <span class="mono ok">53.5</span> against yield. That is heavily overbuilt, which is the
+      correct outcome for an off-the-shelf part in a load path where failure drops the
+      chassis. The valuable finding was not the number itself but the confirmation that the
+      mount was not the weak link, which let the team concentrate on the arm and the pin.
     </p>
 
     <div class="gallery" data-reveal>
@@ -583,7 +583,7 @@
           <li class="is-done"><span class="timeline__date">Apr 1</span>Movement testing begins</li>
           <li class="is-done"><span class="timeline__date">Apr 6</span>Counterweight adjustments</li>
           <li class="is-done"><span class="timeline__date">Apr 13</span>Full-load testing begins</li>
-          <li class="is-done"><span class="timeline__date">Apr 20</span>Counterweight finalised</li>
+          <li class="is-done"><span class="timeline__date">Apr 20</span>Counterweight finalized</li>
           <li class="is-done"><span class="timeline__date">Apr 24</span>Testing complete, handed over</li>
         </ul>
       </div>
@@ -619,12 +619,12 @@
     <h3 style="margin-top:3rem" data-reveal>Bill of materials</h3>
     <p style="max-width:68ch" data-reveal>
       Twenty-six line items across McMaster-Carr hardware and JVM stock steel, costed per unit
-      and totalling <span class="mono ok">$5,432.33</span> — comfortably inside the $7,500
+      and totaling <span class="mono ok">$5,432.33</span> — comfortably inside the $7,500
       budget, with the gearmotor and actuator as the two dominant costs.
     </p>
     <figure data-reveal class="figure--wide">
       <img src="../assets/img/bom-table.webp" width="1129" height="682" loading="lazy"
-           alt="The complete costed bill of materials, thirty rows, totalling $5,432.33">
+           alt="The complete costed bill of materials, thirty rows, totaling $5,432.33">
       <figcaption>The delivered BOM, as submitted.</figcaption>
     </figure>
   </div>
@@ -634,10 +634,10 @@
 <section class="section--tight">
   <div class="wrap prose">
     <div class="eyebrow"><span class="eyebrow__i">07</span> Outcome</div>
-    <h2 style="margin-top:0" data-reveal>What worked, and what I'd change</h2>
+    <h2 style="margin-top:0" data-reveal>What worked, and what I would change</h2>
 
     <p data-reveal>
-      The machine was delivered, load tested and handed over on schedule. It rotates the
+      The machine was delivered, load-tested and handed over on schedule. It rotates the
       chassis 180°, it holds 2,000 lb, it fits the footprint, and it came in $2,068 under
       budget. Every deadline and deliverable landed on time.
     </p>
@@ -650,20 +650,20 @@
         does not fail, and it has margin over yield, but it is thinner than we wanted.
       </p>
       <p style="margin-bottom:0">
-        Our handover recommendation was three-fold: increase the shaft size, redesign the
-        bearing mount, and add a guiderail to take some of the deflection out of the arm.
+        Our handover recommendation was threefold: increase the shaft size, redesign the
+        bearing mount, and add a guide rail to absorb some of the deflection in the arm.
         Separately, McMaster lead times ran longer than planned and compressed the
         fabrication and testing window — on the next one I would order long-lead hardware
         before the design is fully frozen, and accept a little rework, rather than
-        serialising procurement behind a finished drawing package.
+        serializing procurement behind a finished drawing package.
       </p>
     </div>
 
     <p data-reveal>
-      The thing I took away from the pin study specifically: a hand calculation and an FEA
-      that disagree by 4× are not a problem to be resolved by picking the friendlier number.
-      Understanding <em>why</em> they disagree is what told us how the part actually fails,
-      and that is what drove the sizing decision.
+      The lesson I took from the pin study in particular is that a hand calculation and an
+      FEA disagreeing by a factor of four is not a problem to be settled by choosing the
+      more favorable number. Understanding <em>why</em> they disagree is what revealed how
+      the part actually fails, and that understanding is what drove the sizing decision.
     </p>
   </div>
 </section>
@@ -682,8 +682,8 @@
       <div>
         <h2>Want the full report?</h2>
         <p class="lede">
-          Happy to walk through the calculations, the drawing package, or the parts of the
-          build that did not go to plan.
+          I am glad to walk through the calculations, the drawing package, or the parts of
+          the build that did not go to plan.
         </p>
         <a class="btn btn--primary" href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
       </div>
