@@ -47,8 +47,8 @@
     <h1>Cram-A-Lot Chassis Rotator</h1>
     <p class="lede">
       A 2,000 lb powered mechanism that rotates production chassis 180° without tying up
-      the overhead crane. Sponsored by JVM / Cram-A-Lot, designed and built by a team of
-      six, and handed over to the sponsor in April 2026.
+      the overhead crane. Sponsored by JVM / Cram-A-Lot and built by a team of six, it was
+      handed over to the sponsor in April 2026.
     </p>
 
     <div class="facts">
@@ -80,7 +80,8 @@
         <p>
           Cram-A-Lot asked for a dedicated machine: rotate the chassis a full 180°, take the
           crane out of the loop, shrink the floor space it needs, and keep the operator at a
-          safe distance — all for under $7,500 and manufacturable in their own shop.
+          safe distance. It had to cost under $7,500 and be something they could build in
+          their own shop.
         </p>
       </div>
 
@@ -315,7 +316,7 @@
         This was a six-person team, and the analysis work was split by component. The two
         analyses below — <strong>the central pin</strong> and <strong>the clevis
         mount</strong> — are mine, start to finish: load case, hand calculations, FEA setup,
-        and the sizing recommendation the team built to.
+        and the sizing recommendation the team ultimately used.
       </p>
       <p style="margin-bottom:0">
         The upper-arm analysis was Diana Trujillo's and the restraining-arm analysis was
@@ -495,8 +496,8 @@
     <p style="max-width:68ch" data-reveal>
       The clevis mount ties the electric actuator to the third arm — it takes the actuator
       force plus the chassis weight every time the arm swings. I modeled the 1 in weld-on
-      mount to its catalog dimensions and loaded it at the full
-      <span class="mono">2,000 lbf</span> static case.
+      mount to its catalog dimensions and analyzed it under the full
+      <span class="mono">2,000 lbf</span> static load.
     </p>
     <p style="max-width:68ch" data-reveal>
       The result was under half a millimeter of deflection and a factor of safety of roughly
@@ -570,8 +571,8 @@
     </div>
 
     <p style="max-width:68ch" data-reveal>
-      Diana's own FEA on the upper and lower arm at 90°, the position where the load is
-      worst. These are her original result plots, not a re-render.
+      The plots below are Diana's own FEA on the upper and lower arm at 90°, the position
+      where the load is worst — her original result plots, not a re-render.
     </p>
 
     <div class="gallery" data-reveal>
@@ -672,9 +673,9 @@
 
     <h3 style="margin-top:3rem" data-reveal>Bill of materials</h3>
     <p style="max-width:68ch" data-reveal>
-      Twenty-six line items across McMaster-Carr hardware and JVM stock steel, costed per unit
-      and totaling <span class="mono ok">$5,432.33</span> — comfortably inside the $7,500
-      budget, with the gearmotor and actuator as the two dominant costs.
+      The BOM totals twenty-six line items across McMaster-Carr hardware and JVM stock
+      steel, costed per unit at <span class="mono ok">$5,432.33</span> — comfortably inside
+      the $7,500 budget, with the gearmotor and actuator as the two dominant costs.
     </p>
     <figure data-reveal class="figure--wide">
       <img src="../assets/img/bom-table.webp" width="1129" height="682" loading="lazy"
@@ -714,10 +715,10 @@
     </div>
 
     <p data-reveal>
-      The lesson I took from the pin study in particular is that a hand calculation and an
-      FEA disagreeing by a factor of four is not a problem to be settled by choosing the
+      The lesson I took from the pin study specifically: when a hand calculation and an
+      FEA disagree by a factor of four, that isn't a problem to be settled by choosing the
       more favorable number. Understanding <em>why</em> they disagree is what revealed how
-      the part actually fails, and that understanding is what drove the sizing decision.
+      the part actually fails, and that understanding drove the sizing decision.
     </p>
   </div>
 </section>

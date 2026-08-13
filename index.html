@@ -29,9 +29,9 @@
 <nav class="nav">
   <a class="nav__brand" href="index.html">Grant Leyda <span>/ ME</span></a>
   <div class="nav__links">
+    <a href="#about">About</a>
     <a href="#engineering">Engineering</a>
     <a href="#software">Software</a>
-    <a href="#about">About</a>
     <a href="assets/Grant_Leyda_Resume_2026.pdf">Résumé</a>
     <button class="icon-btn" data-theme-toggle aria-label="Switch theme">◑</button>
   </div>
@@ -84,8 +84,9 @@
           I'm a mechanical engineer. The work I like best is structural — working out how
           big a part has to be to carry its load, checking it by hand and in FEA, then
           building it and finding out whether I got it right. My senior capstone was a
-          machine that rotates <strong>2,000&nbsp;lb steel chassis</strong>. Six of us
-          designed it, built it, and handed it over to the sponsor this spring.
+          machine that rotates <strong>2,000&nbsp;lb steel chassis</strong> 180 degrees for
+          an industrial sponsor. Six of us designed and built it, and we handed it over
+          this past spring.
         </p>
         <div class="hero__cta">
           <a class="btn btn--primary" href="projects/rotator.html">
@@ -107,28 +108,62 @@
 </header>
 
 <!-- ===================================================================== -->
-<section class="section--tight">
+<section class="section gridbg" id="about">
   <div class="wrap">
-    <div class="metrics" data-reveal>
-      <div class="metric">
-        <div class="metric__value"><span data-count="2000">2,000</span><span class="metric__unit">lb</span></div>
-        <div class="metric__label">Design load, rotated 180°</div>
+    <div class="eyebrow">About</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:3rem">
+      <div data-reveal>
+        <h2>An engineer who can also talk to the customer</h2>
+        <p style="margin-top:1.5rem">
+          I graduated from the University of Arkansas in May 2026 with a B.S. in Mechanical
+          Engineering and an aerospace concentration. What I'm best at is structural work —
+          taking a load case, sizing the member that has to carry it, checking it by hand and
+          in FEA, and then building it.
+        </p>
+        <p>
+          On the capstone I owned two of the critical component analyses — the central pin
+          that carries the top arm, and the clevis mount that ties the actuator into it.
+          I then spent that spring sourcing material, machining at both UARK and the
+          sponsor's facility, and assembling the finished machine in their warehouse.
+        </p>
+        <p>
+          I also spent two years in commission solar sales at Sunder Energy and LGCY Power.
+          That work taught me to explain a technical product to an audience that did not ask
+          for a lesson, to address objections honestly, and to maintain the relationship
+          after the sale. It is a large part of why I am comfortable presenting to a sponsor,
+          and why I am equally interested in design roles and in sales engineering.
+        </p>
+        <p>
+          <!-- INTERESTS: one line, Grant's own words go here. -->
+        </p>
       </div>
-      <div class="metric">
-        <div class="metric__value"><span data-count="1.6">1.6</span><span class="metric__unit">min FOS</span></div>
-        <div class="metric__label">Governing component, SolidWorks FEA</div>
-      </div>
-      <div class="metric">
-        <div class="metric__value"><span class="metric__unit">$</span><span data-count="5432">5,432</span></div>
-        <div class="metric__label">Delivered BOM, against a $7,500 budget</div>
-      </div>
-      <div class="metric">
-        <div class="metric__value"><span data-count="26">26</span><span class="metric__unit">line items</span></div>
-        <div class="metric__label">BOM sourced, machined and assembled</div>
-      </div>
-      <div class="metric">
-        <div class="metric__value"><span data-count="3.37">3.37</span><span class="metric__unit">GPA</span></div>
-        <div class="metric__label">B.S.M.E., University of Arkansas</div>
+
+      <div data-reveal style="--delay:100ms">
+        <div class="callout" style="margin-top:0">
+          <div class="callout__label">Education</div>
+          <p style="margin-bottom:.4rem"><strong>B.S. Mechanical Engineering</strong><br>
+          University of Arkansas — Fayetteville, May 2026</p>
+          <p style="margin-bottom:.4rem" class="mono" style="font-size:.85rem">
+            Aerospace Concentration · GPA 3.37</p>
+          <p style="margin-bottom:0;color:var(--ink-3);font-size:.9rem">
+            Chancellor's List &amp; Dean's List, Spring 2023 (4.0)</p>
+        </div>
+
+        <div class="callout">
+          <div class="callout__label">Certification</div>
+          <p style="margin-bottom:0">
+            <strong>SolidWorks CSWA</strong> — Certified SolidWorks Associate, 2023
+          </p>
+        </div>
+
+        <div class="callout">
+          <div class="callout__label">Looking for</div>
+          <p style="margin-bottom:0">
+            Entry-level mechanical / aerospace design, manufacturing, or sales engineering.
+            Dallas–Fort Worth and Austin preferred; open to relocation.
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -160,7 +195,8 @@
     <p class="lede" data-reveal style="--delay:60ms">
       Personal projects built end to end, including authentication, data storage and
       deployment. Engineering increasingly depends on scripting and automation, and these
-      are the clearest evidence that I can build that tooling as well as use it.
+      projects are the clearest evidence that I can build that kind of software, not just
+      use it.
     </p>
 
     <div class="cards cards--split" data-projects="software" style="margin-top:2.5rem">
@@ -178,7 +214,7 @@
     <div class="eyebrow"><span class="eyebrow__i">03</span> Capabilities</div>
     <h2 data-reveal>Tools and methods I work in</h2>
     <p class="lede" data-reveal style="--delay:60ms">
-      Highlighted items are those I have used to deliver production hardware, not only coursework.
+      Highlighted items are skills I have used to deliver production hardware, not just learned in a classroom.
     </p>
 
     <div class="caps" data-reveal style="margin-top:2.5rem">
@@ -221,65 +257,6 @@
           <li>Firebase, Firestore security rules</li>
           <li>Technical writing &amp; design review</li>
         </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================================================================== -->
-<section class="section gridbg" id="about">
-  <div class="wrap">
-    <div class="eyebrow"><span class="eyebrow__i">04</span> About</div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:3rem">
-      <div data-reveal>
-        <h2>An engineer who can also talk to the customer</h2>
-        <p style="margin-top:1.5rem">
-          I graduated from the University of Arkansas in May 2026 with a B.S. in Mechanical
-          Engineering and an aerospace concentration. What I am best at is structural work:
-          take the load case, size the member that has to carry it, check it both by hand and
-          in FEA, and then go build it.
-        </p>
-        <p>
-          On the capstone I owned two of the critical component analyses — the central pin
-          that carries the top arm, and the clevis mount that ties the actuator into it.
-          I then spent the spring sourcing material, machining at both UARK and the
-          sponsor's facility, and assembling the finished machine in their warehouse.
-        </p>
-        <p>
-          I also spent two years in commission solar sales at Sunder Energy and LGCY Power.
-          That work taught me to explain a technical product to an audience that did not ask
-          for a lesson, to address objections honestly, and to maintain the relationship
-          after the sale. It is a large part of why I am comfortable presenting to a sponsor,
-          and why I am equally interested in design roles and in sales engineering.
-        </p>
-      </div>
-
-      <div data-reveal style="--delay:100ms">
-        <div class="callout" style="margin-top:0">
-          <div class="callout__label">Education</div>
-          <p style="margin-bottom:.4rem"><strong>B.S. Mechanical Engineering</strong><br>
-          University of Arkansas — Fayetteville, May 2026</p>
-          <p style="margin-bottom:.4rem" class="mono" style="font-size:.85rem">
-            Aerospace Concentration · GPA 3.37</p>
-          <p style="margin-bottom:0;color:var(--ink-3);font-size:.9rem">
-            Chancellor's List &amp; Dean's List, Spring 2023 (4.0)</p>
-        </div>
-
-        <div class="callout">
-          <div class="callout__label">Certification</div>
-          <p style="margin-bottom:0">
-            <strong>SolidWorks CSWA</strong> — Certified SolidWorks Associate, 2023
-          </p>
-        </div>
-
-        <div class="callout">
-          <div class="callout__label">Looking for</div>
-          <p style="margin-bottom:0">
-            Entry-level mechanical / aerospace design, manufacturing, or sales engineering.
-            Dallas–Fort Worth and Austin preferred; open to relocation.
-          </p>
-        </div>
       </div>
     </div>
   </div>
