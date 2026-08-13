@@ -12,7 +12,7 @@ Run it any time you add new media:
 Everything it writes is committed to the repo, so the site itself has no build step
 and no runtime dependencies.
 
-Requires: Pillow
+Requires: Pillow, PyMuPDF (pip install pymupdf)
 """
 
 from __future__ import annotations
@@ -22,7 +22,8 @@ import sys
 import zipfile
 from pathlib import Path
 
-from PIL import Image
+import pymupdf
+from PIL import Image, ImageOps
 
 # --------------------------------------------------------------------------------------
 # Paths
@@ -40,10 +41,20 @@ JVM = CP / "JVM Solidworks Parts"
 STL_DIR = CP / "STL Files"
 PPTX = ENG / "Grant Leyda Portfolio.pptx"
 CPII_PPTX = Path("C:/Users/jleyd/Downloads/CPII Final Presentation JVM.pptx")
+CCA_PDF = CP / "Critical Component Analysis Final.pdf"
 
 MAX_EDGE = 1600
 THUMB_EDGE = 480
 QUALITY = 82
+
+# Some source photos were rotated for display inside PowerPoint via a slide-level
+# transform (<a:xfrm rot="...">) rather than by rotating the embedded file, so the raw
+# bytes we extract come out sideways. Confirmed by reading the deck's slide XML: slide 5
+# of the portfolio deck applies rot="5400000" (90 degrees, clockwise) to image19.jpeg.
+# Degrees are clockwise, matching the OOXML convention.
+MANUAL_ROTATE_CW: dict[str, int] = {
+    "build-photo-installed": 90,
+}
 
 # --------------------------------------------------------------------------------------
 # Image sources
@@ -60,6 +71,10 @@ QUALITY = 82
 FEA_CROP = (278, 222, 34, 67)
 
 # (output stem, source path, crop-or-None)
+#
+# "Annotated assembly.png" is deliberately not listed here even though it exists in this
+# folder: the CP2 deck's copy of the same screenshot (see CPII_IMAGES below) is sharper
+# and needs a smaller crop, and the pipeline asserts stems are unique — see main().
 IMAGES: list[tuple[str, Path, tuple[int, int, int, int] | None]] = [
     # --- FEA plots (high-res SolidWorks screenshots) -----------------------------------
     ("fea-pin-vonmises", JVM / "Pin Von Mises.png", FEA_CROP),
@@ -68,9 +83,13 @@ IMAGES: list[tuple[str, Path, tuple[int, int, int, int] | None]] = [
     ("fea-clevis-vonmises", CP / "Hydraulic connection FEA Von Mises .png", FEA_CROP),
     ("fea-clevis-displacement", CP / "Hydraulic connection FEA Displacement .png", FEA_CROP),
     # --- CAD renders -------------------------------------------------------------------
-    ("top-arm-annotated", JVM / "Annotated assembly.png", None),
+    # "Arm exploded assembly.png" is the assembled view despite its filename — it's the
+    # same geometry as top-arm-annotated with no callouts, so it isn't used on the site,
+    # but is still generated in case it's useful later. The numbered views are the ones
+    # that actually show parts pulled apart; view 1 is the one used, cropped to drop the
+    # SolidWorks toolbar the same way top-arm-annotated is.
     ("top-arm-exploded", JVM / "Arm exploded assembly.png", None),
-    ("top-arm-exploded-1", JVM / "Arm exploded View 1.png", None),
+    ("top-arm-exploded-1", JVM / "Arm exploded View 1.png", (0, 38, 0, 0)),
     ("top-arm-exploded-2", JVM / "Arm exploded View 2.png", None),
     ("top-arm-exploded-3", JVM / "Arm exploded View 3.png", None),
     ("top-arm-exploded-4", JVM / "Arm exploded View 4.png", None),
@@ -91,31 +110,45 @@ PPTX_IMAGES: list[tuple[str, str, tuple[int, int, int, int] | None]] = [
 ]
 
 # CP2 Final Design Review deck — the richest single source. Presented 2026-04-24.
+#
+# image13/14/17/20/24 (all labelled "fea-arm-*" in an earlier pass) are NOT used: visual
+# inspection showed they depict the restraining-arm bracket, not the upper/lower arm the
+# report table cites, and at 1327x758 or smaller they were soft besides. The correct,
+# sharp, exactly-matching-the-report images come from the PDF instead — see PDF_IMAGES.
 CPII_IMAGES: list[tuple[str, str, tuple[int, int, int, int] | None]] = [
     # --- machine renders ---------------------------------------------------------------
     ("cad-machine-loaded", "ppt/media/image10.png", None),   # full machine with chassis, 3/4
     ("cad-machine-hero", "ppt/media/image12.png", None),     # full machine, standing
     ("cad-machine-side", "ppt/media/image9.png", None),      # side view, actuator visible
-    ("cad-frame", "ppt/media/image2.jpg", None),             # motion study: chassis level
     ("motion-chassis-level", "ppt/media/image1.jpg", None),
     ("motion-chassis-rotated", "ppt/media/image3.jpg", None),
     # --- design detail -----------------------------------------------------------------
     ("assembly-ballooned", "ppt/media/image4.png", None),    # numbered exploded assembly
     ("subassembly-exploded", "ppt/media/image7.png", None),  # drive subassembly, motor + gear
-    ("top-arm-annotated", "ppt/media/image21.png", None),
+    ("top-arm-annotated", "ppt/media/image21.png", (0, 38, 0, 0)),  # trims the SW toolbar row
     ("part-variants", "ppt/media/image15.png", None),        # arm design iterations
-    ("requirements-table", "ppt/media/image16.png", None),   # customer needs vs delivered
     ("bom-table", "ppt/media/image23.png", None),            # costed BOM, $5,432 total
-    # --- arm FEA, full resolution ------------------------------------------------------
-    ("fea-arm-displacement", "ppt/media/image17.png", None),
-    ("fea-arm-stress", "ppt/media/image14.png", None),
-    ("fea-arm-vonmises", "ppt/media/image24.png", None),
-    ("fea-arm-fos", "ppt/media/image13.png", None),
-    ("fea-arm-stress-alt", "ppt/media/image20.png", None),
     # --- photographs ---------------------------------------------------------------------
     ("rotator-in-use", "ppt/media/image5.png", None),        # chassis mid-rotation, shop floor
     ("build-photo-team", "ppt/media/image11.jpg", None),     # team assembling the frame
     ("build-photo-final", "ppt/media/image19.jpg", None),    # finished machine, JVM floor
+]
+
+# Critical Component Analysis Final.pdf — the source report itself. These are the actual
+# embedded PNG plots (not a rasterised screenshot of the page), so they are sharp, and
+# their legend values are cross-checked against the report's own table:
+#   page 2, image 0: von Mises stress, upper/lower arm.  Legend max 1.897e8 -> matches the
+#                     report's "Max Stress 1.897e8 N/m^2" for the Upper Arm exactly.
+#   page 2, image 1: factor of safety, same load case.   Legend Min FOS = 1.318 -> matches
+#                     "Static FoS 1.318" exactly.
+#   page 3, image 0: resultant displacement (URES).      Legend max 1.681e1 mm = 0.6619 in
+#                     -> matches "Max Deflection (in) 0.6619" exactly.
+# (page, image-index) are 0-indexed and taken from PyMuPDF's embedded-image order, which
+# is confirmed correct by the value matches above rather than assumed from position.
+PDF_IMAGES: list[tuple[str, Path, int, int]] = [
+    ("fea-arm-stress", CCA_PDF, 1, 0),
+    ("fea-arm-fos", CCA_PDF, 1, 1),
+    ("fea-arm-deflection", CCA_PDF, 2, 0),
 ]
 
 # Custom-designed parts get their own 3D viewer. Purchased McMaster hardware and the
@@ -161,6 +194,14 @@ def _fit(im: Image.Image, max_edge: int) -> Image.Image:
 
 
 def write_image(stem: str, im: Image.Image, crop=None, square=False) -> None:
+    # Applies a camera's EXIF orientation tag, if present, before anything else touches
+    # the pixels. None of the current sources carry one (checked), but this is the kind
+    # of bug that stays invisible until someone drops in a phone photo that does.
+    im = ImageOps.exif_transpose(im)
+
+    if stem in MANUAL_ROTATE_CW:
+        im = im.rotate(-MANUAL_ROTATE_CW[stem], expand=True)
+
     im = _flatten(im)
 
     if crop:
@@ -185,11 +226,129 @@ def write_image(stem: str, im: Image.Image, crop=None, square=False) -> None:
     print(f"  img  {stem:26s} {full.size[0]:5d}x{full.size[1]:<5d} {kb:7.1f} KB")
 
 
+def _font(size: int, bold: bool = False) -> "ImageFont.FreeTypeFont":
+    from PIL import ImageFont
+
+    candidates = (
+        [r"C:\Windows\Fonts\consolab.ttf", r"C:\Windows\Fonts\segoeuib.ttf"]
+        if bold
+        else [r"C:\Windows\Fonts\consola.ttf", r"C:\Windows\Fonts\segoeui.ttf"]
+    )
+    for path in candidates:
+        try:
+            return ImageFont.truetype(path, size)
+        except OSError:
+            continue
+    return ImageFont.load_default()
+
+
+def generated_covers() -> None:
+    """Draws the two software-project title cards.
+
+    Bankroll and Recipe Book don't have a marketing screenshot to source a cover from, so
+    these are designed cards instead — real vector-style content (a data curve, a pipeline
+    diagram), not a fake product screenshot. They are code, not a source file, which is why
+    they live here instead of in one of the source lists above: nothing on disk to point at,
+    and nothing to go missing if `assets/img` gets wiped and rebuilt.
+    """
+    from PIL import ImageDraw
+
+    W, H = 1440, 900
+    BG, GRID, ACC, INK, MUT = (11, 15, 20), (26, 38, 50), (232, 69, 92), (232, 238, 244), (117, 134, 151)
+
+    def base(title: str, kicker: str, sub: str) -> tuple[Image.Image, "ImageDraw.ImageDraw"]:
+        im = Image.new("RGB", (W, H), BG)
+        d = ImageDraw.Draw(im, "RGBA")
+        for x in range(0, W, 60):
+            d.line([(x, 0), (x, H)], fill=GRID)
+        for y in range(0, H, 60):
+            d.line([(0, y), (W, y)], fill=GRID)
+        d.text((150, 140), title, font=_font(88, True), fill=INK)
+        d.text((156, 252), kicker, font=_font(26), fill=ACC)
+        d.text((156, 302), sub, font=_font(24), fill=MUT)
+        return im, d
+
+    # --- Bankroll: a rising session-total curve, the app's actual subject -------------
+    import random
+
+    im, d = base("BANKROLL", "SESSION TRACKING  \u00b7  PROGRESSIVE WEB APP",
+                 "Vanilla JS \u00b7 Firebase Auth \u00b7 Cloud Firestore \u00b7 ~2,200 lines")
+    random.seed(7)
+    pts, val = [], 0.0
+    for _ in range(46):
+        val += random.uniform(-0.30, 0.62)
+        pts.append(val)
+    lo, hi = min(pts), max(pts)
+    x0, x1, ybase, yamp = 150, W - 150, 700, 300
+    coords = [(x0 + (x1 - x0) * i / 45, ybase - yamp * ((v - lo) / (hi - lo))) for i, v in enumerate(pts)]
+    d.polygon([(x0, ybase)] + coords + [(x1, ybase)], fill=(*ACC, 26))
+    d.line(coords, fill=ACC, width=4, joint="curve")
+    for c in coords[::9]:
+        d.ellipse([c[0] - 6, c[1] - 6, c[0] + 6, c[1] + 6], fill=BG, outline=ACC, width=3)
+    d.line([(x0, ybase), (x1, ybase)], fill=(44, 61, 77), width=2)
+    d.text((150, 790), "leydagrant-ux.github.io/Bankroll", font=_font(24), fill=MUT)
+    write_image("bankroll-cover", im)
+
+    # --- Recipe Book: the four-stage pipeline, the app's actual architecture ----------
+    im, d = base("RECIPE BOOK", "VIDEO  \u2192  STRUCTURED RECIPE",
+                 "Python \u00b7 Flask \u00b7 SQLite \u00b7 LLM extraction \u00b7 iOS Shortcut")
+    stages = ["REEL", "TRANSCRIPT", "EXTRACT", "RECIPE"]
+    bw, bh, gap, y0, x = 250, 96, 58, 480, 150
+    for i, st in enumerate(stages):
+        box = [x, y0, x + bw, y0 + bh]
+        d.rounded_rectangle(box, 12, fill=(18, 26, 34), outline=ACC if i == 2 else (44, 61, 77), width=2)
+        tw = d.textlength(st, font=_font(24, True))
+        d.text((x + (bw - tw) / 2, y0 + bh / 2 - 16), st, font=_font(24, True), fill=INK if i == 2 else MUT)
+        if i < len(stages) - 1:
+            ax = x + bw
+            d.line([(ax + 12, y0 + bh / 2), (ax + gap - 16, y0 + bh / 2)], fill=ACC, width=3)
+            d.polygon([(ax + gap - 16, y0 + bh / 2 - 7), (ax + gap - 16, y0 + bh / 2 + 7), (ax + gap - 4, y0 + bh / 2)], fill=ACC)
+        x += bw + gap
+    d.text((150, 650), "Images stored as bytes, not links \u2014 the library outlives the source post.",
+           font=_font(24), fill=MUT)
+    d.text((150, 790), "github.com/leydagrant-ux/Recipe-Book", font=_font(24), fill=MUT)
+    write_image("recipes-cover", im)
+
+
+def pdf_embedded_image(pdf_path: Path, page_no: int, image_index: int) -> Image.Image:
+    """Pulls one embedded raster image out of a PDF page, at its native resolution.
+
+    This is not a screenshot of the rendered page — it is the original image the PDF
+    embeds, so a PNG figure pasted into a Word doc comes back exactly as sharp as it went
+    in, rather than however sharp a JPEG export of the PowerPoint slide happened to be.
+    """
+    doc = pymupdf.open(pdf_path)
+    try:
+        page = doc[page_no]
+        images = page.get_images(full=True)
+        xref = images[image_index][0]
+        raw = doc.extract_image(xref)
+        from io import BytesIO
+
+        return Image.open(BytesIO(raw["image"]))
+    finally:
+        doc.close()
+
+
 def main() -> int:
     for d in (IMG_OUT, MODEL_OUT, RAW_IN):
         d.mkdir(parents=True, exist_ok=True)
 
     missing: list[str] = []
+
+    # A stem silently overwriting another stem's output is exactly how the site ended up
+    # showing the wrong FEA plot under the right caption once already — catch it here
+    # instead of relying on someone noticing the picture is wrong.
+    all_stems = (
+        [s for s, _, _ in IMAGES]
+        + [s for s, _, _ in PPTX_IMAGES]
+        + [s for s, _, _ in CPII_IMAGES]
+        + [s for s, _, _, _ in PDF_IMAGES]
+        + ["bankroll-cover", "recipes-cover"]
+    )
+    dupes = {s for s in all_stems if all_stems.count(s) > 1}
+    if dupes:
+        raise SystemExit(f"build_assets: duplicate output stem(s), fix before running: {sorted(dupes)}")
 
     print("\nImages from disk")
     for stem, src, crop in IMAGES:
@@ -214,6 +373,19 @@ def main() -> int:
                     continue
                 with z.open(member) as fh:
                     write_image(stem, Image.open(fh), crop=crop)
+
+    print("\nImages from the Critical Component Analysis report")
+    if CCA_PDF.exists():
+        for stem, pdf, page_no, image_index in PDF_IMAGES:
+            try:
+                write_image(stem, pdf_embedded_image(pdf, page_no, image_index))
+            except (IndexError, RuntimeError) as e:
+                missing.append(f"{pdf.name}:page{page_no + 1}#{image_index} ({e})")
+    else:
+        missing.append(str(CCA_PDF))
+
+    print("\nGenerated cards")
+    generated_covers()
 
     print("\nHeadshot")
     headshot = CP / "headshot.jpg"

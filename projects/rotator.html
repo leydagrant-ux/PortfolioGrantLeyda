@@ -155,37 +155,55 @@
     <div class="gallery" data-reveal>
       <button class="shot" data-full="../assets/img/assembly-ballooned.webp"
               data-caption="Ballooned exploded assembly, keyed to the drawing package parts list.">
-        <img src="../assets/img/assembly-ballooned-thumb.webp"
+        <img src="../assets/img/assembly-ballooned.webp" loading="lazy" decoding="async"
              alt="Exploded assembly drawing with numbered balloons identifying each part">
         <figcaption>Ballooned exploded assembly</figcaption>
       </button>
+      <button class="shot" data-full="../assets/img/drawing-exploded-bom.webp"
+              data-caption="The formal drawing sheet — sheet number, title block, and the exploded view the BOM was built against.">
+        <img src="../assets/img/drawing-exploded-bom.webp" loading="lazy" decoding="async"
+             alt="Formal engineering drawing sheet with title block and numbered exploded view">
+        <figcaption>Drawing package sheet</figcaption>
+      </button>
       <button class="shot" data-full="../assets/img/subassembly-exploded.webp"
               data-caption="Drive subassembly — gearmotor, sprocket, bushings, shaft and bearing mount.">
-        <img src="../assets/img/subassembly-exploded-thumb.webp"
+        <img src="../assets/img/subassembly-exploded.webp" loading="lazy" decoding="async"
              alt="Exploded view of the drive subassembly showing gearmotor, sprocket and shaft">
         <figcaption>Drive subassembly</figcaption>
       </button>
+      <button class="shot" data-full="../assets/img/top-arm-annotated.webp"
+              data-caption="Top arm design callouts — the clevis joint (orange), weld lines (red) and the hardware pattern (yellow).">
+        <img src="../assets/img/top-arm-annotated.webp" loading="lazy" decoding="async"
+             alt="Top arm CAD model with the clevis joint, weld lines and bolt pattern highlighted">
+        <figcaption>Top arm — design callouts</figcaption>
+      </button>
       <button class="shot" data-full="../assets/img/cad-machine-side.webp"
               data-caption="Side elevation with the actuator extended and the top arm raised.">
-        <img src="../assets/img/cad-machine-side-thumb.webp"
+        <img src="../assets/img/cad-machine-side.webp" loading="lazy" decoding="async"
              alt="Side view render of the rotator with the actuator extended">
         <figcaption>Side elevation</figcaption>
       </button>
+      <button class="shot" data-full="../assets/img/cad-machine-hero.webp"
+              data-caption="The machine standing without a chassis loaded — the four-legged base and central rotator plate.">
+        <img src="../assets/img/cad-machine-hero.webp" loading="lazy" decoding="async"
+             alt="Full machine render standing without a chassis loaded">
+        <figcaption>Machine, unloaded</figcaption>
+      </button>
       <button class="shot" data-full="../assets/img/part-variants.webp"
               data-caption="Arm design iterations — the geometry changed as the FEA came back.">
-        <img src="../assets/img/part-variants-thumb.webp"
+        <img src="../assets/img/part-variants.webp" loading="lazy" decoding="async"
              alt="Three iterations of the arm part geometry side by side">
         <figcaption>Arm iterations</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/motion-chassis-level.webp"
               data-caption="Motion study, chassis level — start of the rotation cycle.">
-        <img src="../assets/img/motion-chassis-level-thumb.webp"
+        <img src="../assets/img/motion-chassis-level.webp" loading="lazy" decoding="async"
              alt="Motion study frame with the chassis held level">
         <figcaption>Motion study — 0°</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/motion-chassis-rotated.webp"
               data-caption="Motion study, chassis rotated — collision check confirmed clearance through the full arc.">
-        <img src="../assets/img/motion-chassis-rotated-thumb.webp"
+        <img src="../assets/img/motion-chassis-rotated.webp" loading="lazy" decoding="async"
              alt="Motion study frame with the chassis rotated on its side">
         <figcaption>Motion study — rotated</figcaption>
       </button>
@@ -273,6 +291,15 @@
         <div class="viewer__hint">Drag to orbit</div>
       </div>
     </div>
+
+    <figure class="figure--wide" data-reveal style="margin-top:2.5rem">
+      <img src="../assets/img/top-arm-exploded-1.webp" width="1311" height="722" loading="lazy"
+           alt="Exploded view of the top arm, showing the pin, mounting block and hardware pulled apart">
+      <figcaption>
+        The top arm from the viewer above, exploded to show the pin, bushings and
+        mounting hardware it assembles from.
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -310,19 +337,19 @@
     <div class="gallery" data-reveal>
       <button class="shot" data-full="../assets/img/fea-pin-vonmises.webp"
               data-caption="Von Mises stress on the 1.5 in pin — peak 2.229e4 psi against a 3.626e4 psi yield.">
-        <img src="../assets/img/fea-pin-vonmises-thumb.webp"
+        <img src="../assets/img/fea-pin-vonmises.webp" loading="lazy" decoding="async"
              alt="SolidWorks von Mises stress plot of the pin showing a blue and green contour band">
         <figcaption>Pin — von Mises stress</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/fea-pin-displacement.webp"
               data-caption="Displacement on the 1.5 in pin under the 9,192.96 lbf load case.">
-        <img src="../assets/img/fea-pin-displacement-thumb.webp"
+        <img src="../assets/img/fea-pin-displacement.webp" loading="lazy" decoding="async"
              alt="SolidWorks displacement plot of the pin">
         <figcaption>Pin — displacement</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/fea-pin-fos.webp"
               data-caption="Factor of safety distribution. The FEA minimum lands at 1.6, well below the hand calculation — see the note below the study.">
-        <img src="../assets/img/fea-pin-fos-thumb.webp"
+        <img src="../assets/img/fea-pin-fos.webp" loading="lazy" decoding="async"
              alt="SolidWorks factor of safety plot of the pin, largely red indicating high margin">
         <figcaption>Pin — factor of safety</figcaption>
       </button>
@@ -482,13 +509,13 @@
     <div class="gallery" data-reveal>
       <button class="shot" data-full="../assets/img/fea-clevis-vonmises.webp"
               data-caption="Von Mises stress on the clevis mount at 2,000 lbf. Peak stress rings the bore; the body is essentially unloaded.">
-        <img src="../assets/img/fea-clevis-vonmises-thumb.webp"
+        <img src="../assets/img/fea-clevis-vonmises.webp" loading="lazy" decoding="async"
              alt="Von Mises stress plot of the clevis mount showing concentration around the bore">
         <figcaption>Clevis — von Mises stress</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/fea-clevis-displacement.webp"
               data-caption="Displacement of the clevis mount — under 0.5 mm at full load.">
-        <img src="../assets/img/fea-clevis-displacement-thumb.webp"
+        <img src="../assets/img/fea-clevis-displacement.webp" loading="lazy" decoding="async"
              alt="Displacement plot of the clevis mount">
         <figcaption>Clevis — displacement</figcaption>
       </button>
@@ -536,22 +563,43 @@
           </tr>
           <tr>
             <td>Restraining arm</td><td>Aidan Rheay</td><td class="mono">1,957 lbf @ 90° / 180°</td>
-            <td class="num mono">—</td><td class="num mono">—</td>
+            <td class="num mono ok">3.6</td><td class="num mono">0.023 in</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <figure data-reveal class="figure--wide">
-      <img src="../assets/img/fea-arm-displacement.webp" width="1327" height="758"
-           alt="SolidWorks displacement plot of the arm assembly showing the largest deflection at the unsupported arm tips">
-      <figcaption>
-        Arm assembly displacement. The deflection concentrates at the fork tips where there
-        is no support — <b>0.662 in</b> at worst, against an upper-arm FOS of
-        <b>1.32</b> versus the 1.67 ASD reference. Thickening the arms was the team's
-        recommended fix.
-      </figcaption>
-    </figure>
+    <p style="max-width:68ch" data-reveal>
+      Diana's own FEA on the upper and lower arm at 90°, the position where the load is
+      worst. These are her original result plots, not a re-render.
+    </p>
+
+    <div class="gallery" data-reveal>
+      <button class="shot" data-full="../assets/img/fea-arm-stress.webp"
+              data-caption="Von Mises stress, upper/lower arm at 90° — peak 1.897e8 Pa against A36's roughly 2.5e8 Pa yield.">
+        <img src="../assets/img/fea-arm-stress.webp" loading="lazy" decoding="async"
+             alt="SolidWorks von Mises stress plot of the upper and lower arm at 90 degrees">
+        <figcaption>Arm — von Mises stress</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/fea-arm-fos.webp"
+              data-caption="Factor of safety, upper/lower arm at 90° — minimum 1.318, the number that governs the whole machine.">
+        <img src="../assets/img/fea-arm-fos.webp" loading="lazy" decoding="async"
+             alt="SolidWorks factor of safety plot of the upper and lower arm at 90 degrees">
+        <figcaption>Arm — factor of safety</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/fea-arm-deflection.webp"
+              data-caption="Resultant displacement, upper/lower arm at 90° — 16.8 mm (0.662 in) at the unsupported tip.">
+        <img src="../assets/img/fea-arm-deflection.webp" loading="lazy" decoding="async"
+             alt="SolidWorks displacement plot of the upper and lower arm at 90 degrees">
+        <figcaption>Arm — displacement</figcaption>
+      </button>
+    </div>
+
+    <p style="max-width:68ch;margin-top:1.5rem" data-reveal>
+      The deflection concentrates at the fork tips, where there is no support —
+      <b>0.662 in</b> at worst, against an upper-arm FOS of <b>1.32</b> versus the 1.67
+      ASD reference. Thickening the arms was the team's recommended fix.
+    </p>
   </div>
 </section>
 
@@ -590,28 +638,34 @@
     </div>
 
     <div class="gallery" data-reveal style="margin-top:2.5rem">
+      <button class="shot" data-full="../assets/img/build-photo-welding.webp"
+              data-caption="Welding the frame together — University of Arkansas machine shop.">
+        <img src="../assets/img/build-photo-welding.webp" loading="lazy" decoding="async"
+             alt="Team members welding the steel frame in a machine shop">
+        <figcaption>Welding the frame</figcaption>
+      </button>
       <button class="shot" data-full="../assets/img/build-photo-team.webp"
               data-caption="Assembling the frame — University of Arkansas machine shop.">
-        <img src="../assets/img/build-photo-team-thumb.webp"
+        <img src="../assets/img/build-photo-team.webp" loading="lazy" decoding="async"
              alt="Three team members assembling the steel frame in a machine shop">
         <figcaption>Frame assembly</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/build-photo-frame.webp"
               data-caption="The bare weldment standing for the first time before the drive was fitted.">
-        <img src="../assets/img/build-photo-frame-thumb.webp"
+        <img src="../assets/img/build-photo-frame.webp" loading="lazy" decoding="async"
              alt="The bare steel frame of the rotator standing in a warehouse">
         <figcaption>Bare weldment</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/build-photo-final.webp"
               data-caption="The completed machine with the drive, actuator and control box fitted.">
-        <img src="../assets/img/build-photo-final-thumb.webp"
+        <img src="../assets/img/build-photo-final.webp" loading="lazy" decoding="async"
              alt="The completed chassis rotator with gearmotor and actuator installed">
         <figcaption>Completed machine</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/build-photo-installed.webp"
-              data-caption="The assembled machine at the sponsor's facility at the end of the project.">
-        <img src="../assets/img/build-photo-installed-thumb.webp"
-             alt="The finished chassis rotator standing assembled at the sponsor's facility">
+              data-caption="The drive assembly at the sponsor's facility, with two team members, at the end of the project.">
+        <img src="../assets/img/build-photo-installed.webp" loading="lazy" decoding="async"
+             alt="The finished chassis rotator's drive assembly standing at the sponsor's facility with two team members nearby">
         <figcaption>Assembled at JVM</figcaption>
       </button>
     </div>

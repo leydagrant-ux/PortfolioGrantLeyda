@@ -19,9 +19,17 @@ lowercased.
 python tools/build_assets.py
 ```
 
-That converts every image to WebP at two sizes — a full-size one capped at 1600 px and a
-`-thumb` version at 480 px — copies your STLs into `assets/models/`, and copies any video
-into `assets/video/`. It prints a size report at the end so you can see what you added.
+That converts every image to a web-ready WebP capped at 1600 px, copies your STLs into
+`assets/models/`, and copies any video into `assets/video/`. It prints a size report at
+the end so you can see what you added.
+
+Use the full-size WebP everywhere on the page — in galleries, figures, and the lightbox's
+`data-full`. Don't point an inline `<img>` at a smaller `-thumb` variant to "save weight":
+a thumbnail stretched to fill its container looks visibly soft on any modern
+(HiDPI/scaled) display, which is exactly the bug that first shipped on this site. The full
+webp files are already small (tens of KB, occasionally low hundreds for a busy photo), so
+there's nothing to gain from a second, blurrier copy — `loading="lazy"` already keeps
+off-screen images from costing anything until they're scrolled into view.
 
 You need Pillow once: `pip install pillow`.
 

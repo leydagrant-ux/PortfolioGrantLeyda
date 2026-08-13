@@ -127,16 +127,21 @@
     </figure>
 
     <!-- Gallery items open in the lightbox automatically. Each needs data-full
-         (the large image) and ideally data-caption. -->
+         (the large image) and ideally data-caption. The inline <img> should point at the
+         SAME full-size file as data-full, not a small thumbnail — a separate low-res
+         thumb here is what made the first version of this site look soft until you
+         clicked. Full webp files are already capped at 1600px and only tens of KB, so
+         there's no real cost to using them directly; loading="lazy" keeps off-screen
+         ones from costing anything until scrolled into view. -->
     <div class="gallery" data-reveal>
       <button class="shot" data-full="../assets/img/REPLACE-1.webp"
               data-caption="REPLACE: the caption shown in the lightbox.">
-        <img src="../assets/img/REPLACE-1-thumb.webp" alt="REPLACE">
+        <img src="../assets/img/REPLACE-1.webp" loading="lazy" decoding="async" alt="REPLACE">
         <figcaption>REPLACE: short label</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/REPLACE-2.webp"
               data-caption="REPLACE">
-        <img src="../assets/img/REPLACE-2-thumb.webp" alt="REPLACE">
+        <img src="../assets/img/REPLACE-2.webp" loading="lazy" decoding="async" alt="REPLACE">
         <figcaption>REPLACE</figcaption>
       </button>
     </div>
