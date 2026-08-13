@@ -456,7 +456,10 @@ section { position: relative; }
     linear-gradient(to bottom, transparent 55%, var(--bg) 97%);
 }
 
-.hero__inner { position: relative; z-index: 1; width: 100%; }
+/* No width here: .hero__inner also carries .wrap in the markup, and a same-specificity
+   `width` declared on both classes is decided by source order, not intent — this one used
+   to win and silence .wrap's centering, pinning the whole hero flush to the left edge. */
+.hero__inner { position: relative; z-index: 1; }
 
 .hero__grid {
   display: grid;
@@ -801,7 +804,13 @@ td.num, th.num { text-align: right; }
    -------------------------------------------------------------------------- */
 
 figure { margin: var(--s4) 0; }
-figure img { border-radius: var(--r2); border: 1px solid var(--line); background: var(--bg-1); }
+figure img, figure video { border-radius: var(--r2); border: 1px solid var(--line); background: var(--bg-1); }
+figure video { width: 100%; }
+
+/* A portrait clip (phone footage) stretched to the article's full measure would run
+   absurdly tall — cap its width and center it instead of forcing it to fill the column
+   the way a landscape figure does. */
+.figure--portrait { max-width: 420px; margin-inline: auto; }
 figcaption {
   margin-top: .7rem;
   font-size: .84rem;

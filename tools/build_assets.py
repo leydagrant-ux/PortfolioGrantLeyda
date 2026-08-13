@@ -412,13 +412,17 @@ def main() -> int:
         kb = (MODEL_OUT / name).stat().st_size / 1024
         print(f"  stl  {name:26s} {kb:7.1f} KB")
 
-    for p in (sorted(RAW_IN.glob("*.stl")) + sorted(RAW_IN.glob("*.STL"))) if RAW_IN.exists() else []:
+    # glob("*.stl") and glob("*.STL") return the SAME files twice on a case-insensitive
+    # filesystem (Windows, default macOS) — matched case-insensitively, so both patterns
+    # find the same STLModel.stl once each. Filter on suffix instead of globbing twice.
+    stl_raw = sorted(p for p in RAW_IN.iterdir() if p.suffix.lower() == ".stl") if RAW_IN.exists() else []
+    for p in stl_raw:
         shutil.copy2(p, MODEL_OUT / p.name.lower())
         print(f"  stl  {p.name.lower():26s} (from assets/raw/)")
 
     # Video is optional. Drop an .mp4 into assets/raw/ and the capstone page picks it up
     # automatically — see the motion-study section in projects/rotator.html.
-    vids = sorted(RAW_IN.glob("*.mp4")) + sorted(RAW_IN.glob("*.MP4")) if RAW_IN.exists() else []
+    vids = sorted(p for p in RAW_IN.iterdir() if p.suffix.lower() == ".mp4") if RAW_IN.exists() else []
     if vids:
         vid_out = ROOT / "assets" / "video"
         vid_out.mkdir(parents=True, exist_ok=True)

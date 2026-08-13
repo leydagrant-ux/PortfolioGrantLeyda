@@ -69,7 +69,7 @@
 
       <div class="prose" data-reveal>
         <div class="eyebrow"><span class="eyebrow__i">01</span> The problem</div>
-        <h2 style="margin-top:0">A crane doing a job it was never meant to do</h2>
+        <h2 style="margin-top:0">A manual, crane-dependent rotation process</h2>
         <p>
           JVM rotates welded steel chassis during production. Their existing method hung the
           chassis from the facility's overhead crane and winch and let an operator turn it by
@@ -101,7 +101,7 @@
 <section class="section--tight gridbg">
   <div class="wrap">
     <div class="eyebrow"><span class="eyebrow__i">02</span> Requirements</div>
-    <h2 data-reveal>What it had to do</h2>
+    <h2 data-reveal>Requirements and constraints</h2>
 
     <div class="table-scroll" data-reveal style="margin-top:2rem">
       <table>
@@ -137,7 +137,7 @@
 <section class="section">
   <div class="wrap">
     <div class="eyebrow"><span class="eyebrow__i">03</span> The design</div>
-    <h2 data-reveal>A rotator plate, two forks, and a clamping top arm</h2>
+    <h2 data-reveal>System overview</h2>
     <p class="lede" data-reveal style="--delay:60ms">
       The chassis loads onto long forks, a top arm swings down to clamp it, and a gearmotor
       driving the central rotator plate turns the whole assembly through 180°. An electric
@@ -209,6 +209,20 @@
         <figcaption>Motion study — rotated</figcaption>
       </button>
     </div>
+
+    <figure class="figure--wide" data-reveal style="margin-top:2.5rem">
+      <video controls preload="none" playsinline
+             poster="../assets/img/rotator-cad-motion-poster.webp">
+        <source src="../assets/video/rotator-cad-motion.mp4" type="video/mp4">
+        Your browser doesn't support embedded video.
+        <a href="../assets/video/rotator-cad-motion.mp4">Download the clip</a> instead.
+      </video>
+      <figcaption>
+        The motion study running — the same simulation the still frames above are pulled
+        from, showing the full 180° cycle and confirming there's no collision anywhere in
+        the arc.
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -216,7 +230,7 @@
 <section class="section--tight">
   <div class="wrap">
     <div class="eyebrow"><span class="eyebrow__i">04</span> Geometry</div>
-    <h2 data-reveal>Turn the actual parts</h2>
+    <h2 data-reveal>Component geometry</h2>
     <p class="lede" data-reveal style="--delay:60ms">
       These are the real STL exports from the SolidWorks models, not illustrations. Drag to
       orbit, scroll to zoom, and toggle the wireframe. The dimensions under each part are
@@ -465,7 +479,7 @@
     </div>
 
     <div class="callout callout--signal" data-reveal>
-      <div class="callout__label">Why the FEA and the hand calc disagree</div>
+      <div class="callout__label">Why the FEA and hand calculations disagree</div>
       <p>
         At the 1.5 in diameter we selected, the hand calculation gives FOS 6.41 but
         SolidWorks reports a minimum of <strong>1.6</strong>. That gap is not an error in
@@ -608,7 +622,7 @@
 <section class="section gridbg" id="build">
   <div class="wrap">
     <div class="eyebrow"><span class="eyebrow__i">06</span> Manufacturing</div>
-    <h2 data-reveal>From drawing package to running machine</h2>
+    <h2 data-reveal>Fabrication and assembly</h2>
     <p class="lede" data-reveal style="--delay:60ms">
       Spring 2026 was the build. We sourced material and hardware, machined parts at both
       the University of Arkansas machine shop and JVM's own facility, and assembled and
@@ -671,6 +685,21 @@
       </button>
     </div>
 
+    <h3 style="margin-top:3rem" data-reveal>First rotation test</h3>
+    <p style="max-width:68ch" data-reveal>
+      The machine's first spin, filmed at JVM's shop. This is unedited footage, not a
+      simulation — the moment the design either works or it doesn't.
+    </p>
+    <figure class="figure--portrait" data-reveal>
+      <video controls preload="none" playsinline
+             poster="../assets/img/rotator-first-spin-poster.webp">
+        <source src="../assets/video/rotator-first-spin.mp4" type="video/mp4">
+        Your browser doesn't support embedded video.
+        <a href="../assets/video/rotator-first-spin.mp4">Download the clip</a> instead.
+      </video>
+      <figcaption>The drive assembly turning under its own power for the first time.</figcaption>
+    </figure>
+
     <h3 style="margin-top:3rem" data-reveal>Bill of materials</h3>
     <p style="max-width:68ch" data-reveal>
       The BOM totals twenty-six line items across McMaster-Carr hardware and JVM stock
@@ -689,7 +718,7 @@
 <section class="section--tight">
   <div class="wrap prose">
     <div class="eyebrow"><span class="eyebrow__i">07</span> Outcome</div>
-    <h2 style="margin-top:0" data-reveal>What worked, and what I would change</h2>
+    <h2 style="margin-top:0" data-reveal>Results and lessons learned</h2>
 
     <p data-reveal>
       The machine was delivered, load-tested and handed over on schedule. It rotates the

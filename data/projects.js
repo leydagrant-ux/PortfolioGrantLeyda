@@ -61,7 +61,10 @@ export const projects = [
     cover: 'assets/img/bankroll-cover.webp',
     alt: 'Title card for the Bankroll project, showing a rising session-total curve',
     href: 'projects/bankroll.html',
-    featured: true,
+    // Not featured: this is the only other card in the Software section, and a featured
+    // (wide, horizontal) card next to a normal card is what made the two look like two
+    // completely different layouts rather than two projects in the same grid.
+    featured: false,
   },
   {
     slug: 'recipes',
