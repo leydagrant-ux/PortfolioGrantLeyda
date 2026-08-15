@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Recipe Book — Grant Leyda</title>
+<title>Recipe Book | Grant Leyda</title>
 <meta name="description" content="A Python and Flask application that turns a cooking video into a structured, searchable recipe using transcript extraction and a language model, stored in a single portable database.">
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="Recipe Book — Grant Leyda">
+<meta property="og:title" content="Recipe Book | Grant Leyda">
 <meta property="og:description" content="Video to structured recipe: transcript extraction, LLM parsing, and a single-file library designed to outlive the source post.">
 <meta property="og:image" content="../assets/img/recipes-cover.webp">
 
@@ -43,8 +43,8 @@
     <p class="lede">
       An application that turns a cooking video into a structured, searchable recipe. It
       pulls the spoken transcript, has a language model extract the ingredients and
-      numbered steps, and stores the result in a single portable database — images
-      included — so the library outlives the original post.
+      numbered steps, and stores the result in a single portable database, images
+      included, so the library outlives the original post.
     </p>
 
     <div class="facts">
@@ -89,7 +89,7 @@
           <tr><th>Stage</th><th>What happens</th></tr>
         </thead>
         <tbody>
-          <tr><td><b>Capture</b></td><td>A share-sheet shortcut posts the video URL to the API — no app switching.</td></tr>
+          <tr><td><b>Capture</b></td><td>A share-sheet shortcut posts the video URL to the API, no app switching.</td></tr>
           <tr><td><b>Transcribe</b></td><td>The service returns the spoken transcript plus the caption text.</td></tr>
           <tr><td><b>Extract</b></td><td>A language model turns that prose into a structured recipe: title, quantified ingredients, numbered steps, notes on servings and substitutions.</td></tr>
           <tr><td><b>Store</b></td><td>The recipe and the cover image are written to SQLite and indexed for search.</td></tr>
@@ -111,7 +111,7 @@
 
     <h3 data-reveal>Make the whole library one file</h3>
     <p data-reveal>
-      Everything — recipes, metadata and images — lives in a single SQLite file. Backing up
+      Everything (recipes, metadata and images) lives in a single SQLite file. Backing up
       the library is copying one file, and moving it between machines needs no export step.
       For a personal-scale application, that portability is worth far more than the
       performance a heavier database would buy.

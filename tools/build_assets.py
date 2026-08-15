@@ -145,10 +145,16 @@ CPII_IMAGES: list[tuple[str, str, tuple[int, int, int, int] | None]] = [
 #                     -> matches "Max Deflection (in) 0.6619" exactly.
 # (page, image-index) are 0-indexed and taken from PyMuPDF's embedded-image order, which
 # is confirmed correct by the value matches above rather than assumed from position.
+#   page 12, images 1-3: restraining arm at 90 (Figures 4-6: horizontal von Mises, FOS,
+#                     displacement). Legend values match the report's 90 row exactly
+#                     (FOS 3.6, deflection 0.5811 mm = 0.0229 in).
 PDF_IMAGES: list[tuple[str, Path, int, int]] = [
     ("fea-arm-stress", CCA_PDF, 1, 0),
     ("fea-arm-fos", CCA_PDF, 1, 1),
     ("fea-arm-deflection", CCA_PDF, 2, 0),
+    ("fea-restraining-vonmises", CCA_PDF, 12, 1),
+    ("fea-restraining-fos", CCA_PDF, 12, 2),
+    ("fea-restraining-displacement", CCA_PDF, 12, 3),
 ]
 
 # Custom-designed parts get their own 3D viewer. Purchased McMaster hardware and the

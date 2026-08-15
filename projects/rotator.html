@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cram-A-Lot Chassis Rotator — Grant Leyda</title>
+<title>Cram-A-Lot Chassis Rotator | Grant Leyda</title>
 <meta name="description" content="Senior capstone: a 2,000 lb industrial chassis rotator designed, analyzed, manufactured and delivered. Includes an interactive pin sizing study built from the original hand calculations.">
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cram-A-Lot Chassis Rotator — Grant Leyda">
+<meta property="og:title" content="Cram-A-Lot Chassis Rotator | Grant Leyda">
 <meta property="og:description" content="From sponsor problem statement to delivered hardware. Orbit the parts, run the pin analysis yourself.">
 <meta property="og:image" content="../assets/img/cad-machine-loaded.webp">
 
@@ -69,7 +69,7 @@
 
       <div class="prose" data-reveal>
         <div class="eyebrow"><span class="eyebrow__i">01</span> The problem</div>
-        <h2 style="margin-top:0">A manual, crane-dependent rotation process</h2>
+        <h2 style="margin-top:0">The crane was taking loads it wasn't designed for</h2>
         <p>
           JVM rotates welded steel chassis during production. Their existing method hung the
           chassis from the facility's overhead crane and winch and let an operator turn it by
@@ -89,7 +89,7 @@
         <img src="../assets/img/rotator-in-use.webp" width="989" height="971"
              alt="A steel chassis suspended and tilted mid-rotation on the shop floor at JVM">
         <figcaption>
-          The operation the machine replaces — a chassis mid-rotation, hanging from the
+          The operation the machine replaces: a chassis mid-rotation, hanging from the
           facility crane.
         </figcaption>
       </figure>
@@ -115,7 +115,7 @@
         <tbody>
           <tr><td>Rotation</td><td class="mono">180° ± 10°</td><td class="ok mono">Met</td></tr>
           <tr><td>Load capacity</td><td class="mono">≥ 2,000 lb</td><td class="ok mono">Met</td></tr>
-          <tr><td>Chassis configurations</td><td class="mono">4 sizes</td><td class="ok mono">Met — modular arms</td></tr>
+          <tr><td>Chassis configurations</td><td class="mono">4 sizes</td><td class="ok mono">Met (modular arms)</td></tr>
           <tr><td>Footprint</td><td class="mono">8 ft × 5 ft</td><td class="ok mono">Met</td></tr>
           <tr><td>Crane dependency</td><td>Eliminate from rotation</td><td class="ok mono">Met</td></tr>
           <tr><td>Operator standoff</td><td class="mono">≥ 3 ft</td><td class="ok mono">Met</td></tr>
@@ -140,8 +140,9 @@
     <h2 data-reveal>System overview</h2>
     <p class="lede" data-reveal style="--delay:60ms">
       The chassis loads onto long forks, a top arm swings down to clamp it, and a gearmotor
-      driving the central rotator plate turns the whole assembly through 180°. An electric
-      actuator drives the top arm; a counterweight keeps the plate balanced through the arc.
+      drives the central rotator plate through the full 180° turn. A separate electric
+      actuator raises and lowers the top arm, and a counterweight keeps the plate balanced
+      as it rotates.
     </p>
 
     <figure class="figure--wide" data-reveal style="margin-top:2.5rem">
@@ -161,22 +162,22 @@
         <figcaption>Ballooned exploded assembly</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/drawing-exploded-bom.webp"
-              data-caption="The formal drawing sheet — sheet number, title block, and the exploded view the BOM was built against.">
+              data-caption="The formal drawing sheet: sheet number, title block, and the exploded view the BOM was built against.">
         <img src="../assets/img/drawing-exploded-bom.webp" loading="lazy" decoding="async"
              alt="Formal engineering drawing sheet with title block and numbered exploded view">
         <figcaption>Drawing package sheet</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/subassembly-exploded.webp"
-              data-caption="Drive subassembly — gearmotor, sprocket, bushings, shaft and bearing mount.">
+              data-caption="Drive subassembly: gearmotor, sprocket, bushings, shaft and bearing mount.">
         <img src="../assets/img/subassembly-exploded.webp" loading="lazy" decoding="async"
              alt="Exploded view of the drive subassembly showing gearmotor, sprocket and shaft">
         <figcaption>Drive subassembly</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/top-arm-annotated.webp"
-              data-caption="Top arm design callouts — the clevis joint (orange), weld lines (red) and the hardware pattern (yellow).">
+              data-caption="Top arm design callouts: the clevis joint (orange), weld lines (red) and the hardware pattern (yellow).">
         <img src="../assets/img/top-arm-annotated.webp" loading="lazy" decoding="async"
              alt="Top arm CAD model with the clevis joint, weld lines and bolt pattern highlighted">
-        <figcaption>Top arm — design callouts</figcaption>
+        <figcaption>Top arm, design callouts</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/cad-machine-side.webp"
               data-caption="Side elevation with the actuator extended and the top arm raised.">
@@ -185,28 +186,28 @@
         <figcaption>Side elevation</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/cad-machine-hero.webp"
-              data-caption="The machine standing without a chassis loaded — the four-legged base and central rotator plate.">
+              data-caption="The machine standing without a chassis loaded: the four-legged base and central rotator plate.">
         <img src="../assets/img/cad-machine-hero.webp" loading="lazy" decoding="async"
              alt="Full machine render standing without a chassis loaded">
         <figcaption>Machine, unloaded</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/part-variants.webp"
-              data-caption="Arm design iterations — the geometry changed as the FEA came back.">
+              data-caption="Arm design iterations: the geometry changed as the FEA came back.">
         <img src="../assets/img/part-variants.webp" loading="lazy" decoding="async"
              alt="Three iterations of the arm part geometry side by side">
         <figcaption>Arm iterations</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/motion-chassis-level.webp"
-              data-caption="Motion study, chassis level — start of the rotation cycle.">
+              data-caption="Motion study, chassis level (start of the rotation cycle).">
         <img src="../assets/img/motion-chassis-level.webp" loading="lazy" decoding="async"
              alt="Motion study frame with the chassis held level">
-        <figcaption>Motion study — 0°</figcaption>
+        <figcaption>Motion study, 0°</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/motion-chassis-rotated.webp"
-              data-caption="Motion study, chassis rotated — collision check confirmed clearance through the full arc.">
+              data-caption="Motion study, chassis rotated. Collision check confirmed clearance through the full arc.">
         <img src="../assets/img/motion-chassis-rotated.webp" loading="lazy" decoding="async"
              alt="Motion study frame with the chassis rotated on its side">
-        <figcaption>Motion study — rotated</figcaption>
+        <figcaption>Motion study, rotated</figcaption>
       </button>
     </div>
 
@@ -218,7 +219,7 @@
         <a href="../assets/video/rotator-cad-motion.mp4">Download the clip</a> instead.
       </video>
       <figcaption>
-        The motion study running — the same simulation the still frames above are pulled
+        The motion study running, the same simulation the still frames above are pulled
         from, showing the full 180° cycle and confirming there's no collision anywhere in
         the arc.
       </figcaption>
@@ -260,7 +261,7 @@
         <div class="viewer__grid" aria-hidden="true"></div>
         <div class="viewer__head">
           <div>
-            <div class="viewer__name">Top arm &mdash; section</div>
+            <div class="viewer__name">Top arm, section</div>
             <div class="viewer__sub">Clamps the chassis from above</div>
           </div>
           <div class="viewer__tools">
@@ -327,23 +328,22 @@
     <div class="callout" data-reveal>
       <div class="callout__label">My contribution</div>
       <p>
-        This was a six-person team, and the analysis work was split by component. The two
-        analyses below — <strong>the central pin</strong> and <strong>the clevis
-        mount</strong> — are mine, start to finish: load case, hand calculations, FEA setup,
-        and the sizing recommendation the team ultimately used.
+        This was a six-person team, and the analysis work was split by component.
+        <strong>The central pin</strong> and <strong>the clevis mount</strong> are mine,
+        start to finish: load case, hand calculations, FEA setup, and the sizing
+        recommendation the team ultimately used. I also worked with Aidan Rheay on the
+        FEA and physical testing of the restraining arm.
       </p>
       <p style="margin-bottom:0">
-        The upper-arm analysis was Diana Trujillo's and the restraining-arm analysis was
-        Aidan Rheay's; both are summarized here because the system-level story does not make
-        sense without them. Full team: Cole McCallum, Cooper Ulrich, Maverick Wynn,
-        Diana Trujillo, Aidan Rheay and myself.
+        Diana Trujillo led the upper and lower arm analysis. Full team: Cole McCallum,
+        Cooper Ulrich, Maverick Wynn, Diana Trujillo, Aidan Rheay and myself.
       </p>
     </div>
 
     <h3 style="margin-top:3rem" data-reveal>The central pin</h3>
     <p style="max-width:68ch" data-reveal>
       This pin holds the third top arm onto the rotator plate. If it fails, the arm lets go
-      and drops a 2,000 lb chassis — so it gets the most conservative treatment of anything
+      and drops a 2,000 lb chassis, so it gets the most conservative treatment of anything
       on the machine. I ran it at <span class="mono">9,192.96 lbf</span> in single shear across
       three candidate diameters, checking shear, bearing and von Mises by hand and then
       confirming with SolidWorks Simulation.
@@ -351,22 +351,22 @@
 
     <div class="gallery" data-reveal>
       <button class="shot" data-full="../assets/img/fea-pin-vonmises.webp"
-              data-caption="Von Mises stress on the 1.5 in pin — peak 2.229e4 psi against a 3.626e4 psi yield.">
+              data-caption="Von Mises stress on the 1.5 in pin: peak 2.229e4 psi against a 3.626e4 psi yield.">
         <img src="../assets/img/fea-pin-vonmises.webp" loading="lazy" decoding="async"
              alt="SolidWorks von Mises stress plot of the pin showing a blue and green contour band">
-        <figcaption>Pin — von Mises stress</figcaption>
+        <figcaption>Pin: von Mises stress</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/fea-pin-displacement.webp"
               data-caption="Displacement on the 1.5 in pin under the 9,192.96 lbf load case.">
         <img src="../assets/img/fea-pin-displacement.webp" loading="lazy" decoding="async"
              alt="SolidWorks displacement plot of the pin">
-        <figcaption>Pin — displacement</figcaption>
+        <figcaption>Pin: displacement</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/fea-pin-fos.webp"
-              data-caption="Factor of safety distribution. The FEA minimum lands at 1.6, well below the hand calculation — see the note below the study.">
+              data-caption="Factor of safety distribution. The FEA minimum lands at 1.6, well below the hand calculation. See the note below the study.">
         <img src="../assets/img/fea-pin-fos.webp" loading="lazy" decoding="async"
              alt="SolidWorks factor of safety plot of the pin, largely red indicating high margin">
-        <figcaption>Pin — factor of safety</figcaption>
+        <figcaption>Pin: factor of safety</figcaption>
       </button>
     </div>
   </div>
@@ -378,7 +378,7 @@
     <div class="study" data-pin-study data-reveal>
       <div class="study__head">
         <div>
-          <h3>Pin sizing study — live</h3>
+          <h3>Pin sizing study, live</h3>
           <p>
             The same hand calculation I ran for the report, made continuous. Move the
             diameter and watch the margin change.
@@ -404,7 +404,7 @@
               <span class="field__val"><span data-out="P">9,192.96</span><small>lbf</small></span>
             </div>
             <input id="in-P" type="range" data-in="P" min="1000" max="16000" step="0.01" value="9192.96">
-            <div class="ticks"><span>1k</span><span>9,192.96 — design</span><span>16k</span></div>
+            <div class="ticks"><span>1k</span><span>9,192.96 (design)</span><span>16k</span></div>
           </div>
 
           <details class="adv">
@@ -483,7 +483,7 @@
       <p>
         At the 1.5 in diameter we selected, the hand calculation gives FOS 6.41 but
         SolidWorks reports a minimum of <strong>1.6</strong>. That gap is not an error in
-        either one — they are answering different questions.
+        either one. They are answering different questions.
       </p>
       <p>
         The hand calculation treats shear as uniform over the pin cross-section and bearing
@@ -495,8 +495,8 @@
       </p>
       <p style="margin-bottom:0">
         So the honest reading is: nominal margin is very large, and the local peak still
-        clears yield with 1.6 to spare. We took the 1.5 in pin over the 1 in — which the
-        hand calc alone would have passed at 2.86 — precisely because the FEA showed how
+        clears yield with 1.6 to spare. We took the 1.5 in pin over the 1 in (which the
+        hand calc alone would have passed at 2.86) precisely because the FEA showed how
         quickly the local peak grows as diameter drops.
       </p>
     </div>
@@ -508,7 +508,7 @@
   <div class="wrap">
     <h3 data-reveal>The clevis mount</h3>
     <p style="max-width:68ch" data-reveal>
-      The clevis mount ties the electric actuator to the third arm — it takes the actuator
+      The clevis mount ties the electric actuator to the third arm. It takes the actuator
       force plus the chassis weight every time the arm swings. I modeled the 1 in weld-on
       mount to its catalog dimensions and analyzed it under the full
       <span class="mono">2,000 lbf</span> static load.
@@ -526,13 +526,13 @@
               data-caption="Von Mises stress on the clevis mount at 2,000 lbf. Peak stress rings the bore; the body is essentially unloaded.">
         <img src="../assets/img/fea-clevis-vonmises.webp" loading="lazy" decoding="async"
              alt="Von Mises stress plot of the clevis mount showing concentration around the bore">
-        <figcaption>Clevis — von Mises stress</figcaption>
+        <figcaption>Clevis: von Mises stress</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/fea-clevis-displacement.webp"
-              data-caption="Displacement of the clevis mount — under 0.5 mm at full load.">
+              data-caption="Displacement of the clevis mount: under 0.5 mm at full load.">
         <img src="../assets/img/fea-clevis-displacement.webp" loading="lazy" decoding="async"
              alt="Displacement plot of the clevis mount">
-        <figcaption>Clevis — displacement</figcaption>
+        <figcaption>Clevis: displacement</figcaption>
       </button>
     </div>
   </div>
@@ -543,7 +543,7 @@
   <div class="wrap">
     <h3 data-reveal>System-level results</h3>
     <p style="max-width:68ch" data-reveal>
-      Across the whole machine, the arms govern — not the fasteners or the mounts. The upper
+      Across the whole machine, the arms govern, not the fasteners or the mounts. The upper
       arm at 90° of rotation is where the margin is thinnest, and it is the component the
       team flagged for redesign.
     </p>
@@ -562,7 +562,7 @@
         <tbody>
           <tr>
             <td>Central pin, 1.5 in</td><td>Grant Leyda</td><td class="mono">9,192.96 lbf shear</td>
-            <td class="num mono ok">1.6</td><td class="num mono">—</td>
+            <td class="num mono ok">1.6</td><td class="num mono">N/A</td>
           </tr>
           <tr>
             <td>Clevis mount</td><td>Grant Leyda</td><td class="mono">2,000 lbf static</td>
@@ -585,36 +585,70 @@
     </div>
 
     <p style="max-width:68ch" data-reveal>
-      The plots below are Diana's own FEA on the upper and lower arm at 90°, the position
-      where the load is worst — her original result plots, not a re-render.
+      The plots below show the upper and lower arm at 90°, the position where the load
+      is worst.
     </p>
 
     <div class="gallery" data-reveal>
       <button class="shot" data-full="../assets/img/fea-arm-stress.webp"
-              data-caption="Von Mises stress, upper/lower arm at 90° — peak 1.897e8 Pa against A36's roughly 2.5e8 Pa yield.">
+              data-caption="Von Mises stress, upper/lower arm at 90°: peak 1.897e8 Pa against A36's roughly 2.5e8 Pa yield.">
         <img src="../assets/img/fea-arm-stress.webp" loading="lazy" decoding="async"
              alt="SolidWorks von Mises stress plot of the upper and lower arm at 90 degrees">
-        <figcaption>Arm — von Mises stress</figcaption>
+        <figcaption>Arm: von Mises stress</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/fea-arm-fos.webp"
-              data-caption="Factor of safety, upper/lower arm at 90° — minimum 1.318, the number that governs the whole machine.">
+              data-caption="Factor of safety, upper/lower arm at 90°: minimum 1.318, the number that governs the whole machine.">
         <img src="../assets/img/fea-arm-fos.webp" loading="lazy" decoding="async"
              alt="SolidWorks factor of safety plot of the upper and lower arm at 90 degrees">
-        <figcaption>Arm — factor of safety</figcaption>
+        <figcaption>Arm: factor of safety</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/fea-arm-deflection.webp"
-              data-caption="Resultant displacement, upper/lower arm at 90° — 16.8 mm (0.662 in) at the unsupported tip.">
+              data-caption="Resultant displacement, upper/lower arm at 90°: 16.8 mm (0.662 in) at the unsupported tip.">
         <img src="../assets/img/fea-arm-deflection.webp" loading="lazy" decoding="async"
              alt="SolidWorks displacement plot of the upper and lower arm at 90 degrees">
-        <figcaption>Arm — displacement</figcaption>
+        <figcaption>Arm: displacement</figcaption>
       </button>
     </div>
 
     <p style="max-width:68ch;margin-top:1.5rem" data-reveal>
-      The deflection concentrates at the fork tips, where there is no support —
+      The deflection concentrates at the fork tips, where there is no support:
       <b>0.662 in</b> at worst, against an upper-arm FOS of <b>1.32</b> versus the 1.67
       ASD reference. Thickening the arms was the team's recommended fix.
     </p>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight gridbg">
+  <div class="wrap">
+    <h3 data-reveal>The restraining arm</h3>
+    <p style="max-width:68ch" data-reveal>
+      This is the top arm that clamps the chassis, studied at both extremes of its swing:
+      nearly vertical loading at 180° and nearly horizontal loading at 90°, where it
+      governs. I worked with Aidan Rheay on the FEA and the physical testing that
+      validated it, since it directly loads the clevis mount I sized separately.
+    </p>
+
+    <div class="gallery" data-reveal>
+      <button class="shot" data-full="../assets/img/fea-restraining-vonmises.webp"
+              data-caption="Von Mises stress on the restraining arm at 90°, the governing case: peak 6.97e7 N/m² against a 2.5e8 N/m² yield.">
+        <img src="../assets/img/fea-restraining-vonmises.webp" loading="lazy" decoding="async"
+             alt="SolidWorks von Mises stress plot of the restraining arm at 90 degrees">
+        <figcaption>Restraining arm: von Mises stress</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/fea-restraining-fos.webp"
+              data-caption="Factor of safety on the restraining arm at 90°: minimum 3.6.">
+        <img src="../assets/img/fea-restraining-fos.webp" loading="lazy" decoding="async"
+             alt="SolidWorks factor of safety plot of the restraining arm at 90 degrees">
+        <figcaption>Restraining arm: factor of safety</figcaption>
+      </button>
+      <button class="shot" data-full="../assets/img/fea-restraining-displacement.webp"
+              data-caption="Displacement on the restraining arm at 90°: 0.58 mm (0.023 in).">
+        <img src="../assets/img/fea-restraining-displacement.webp" loading="lazy" decoding="async"
+             alt="SolidWorks displacement plot of the restraining arm at 90 degrees">
+        <figcaption>Restraining arm: displacement</figcaption>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -654,13 +688,13 @@
 
     <div class="gallery" data-reveal style="margin-top:2.5rem">
       <button class="shot" data-full="../assets/img/build-photo-welding.webp"
-              data-caption="Welding the frame together — University of Arkansas machine shop.">
+              data-caption="Welding the frame together, University of Arkansas machine shop.">
         <img src="../assets/img/build-photo-welding.webp" loading="lazy" decoding="async"
              alt="Team members welding the steel frame in a machine shop">
         <figcaption>Welding the frame</figcaption>
       </button>
       <button class="shot" data-full="../assets/img/build-photo-team.webp"
-              data-caption="Assembling the frame — University of Arkansas machine shop.">
+              data-caption="Assembling the frame, University of Arkansas machine shop.">
         <img src="../assets/img/build-photo-team.webp" loading="lazy" decoding="async"
              alt="Three team members assembling the steel frame in a machine shop">
         <figcaption>Frame assembly</figcaption>
@@ -688,7 +722,7 @@
     <h3 style="margin-top:3rem" data-reveal>First rotation test</h3>
     <p style="max-width:68ch" data-reveal>
       The machine's first spin, filmed at JVM's shop. This is unedited footage, not a
-      simulation — the moment the design either works or it doesn't.
+      simulation. It's the moment the design either works or it doesn't.
     </p>
     <figure class="figure--portrait" data-reveal>
       <video controls preload="none" playsinline
@@ -703,7 +737,7 @@
     <h3 style="margin-top:3rem" data-reveal>Bill of materials</h3>
     <p style="max-width:68ch" data-reveal>
       The BOM totals twenty-six line items across McMaster-Carr hardware and JVM stock
-      steel, costed per unit at <span class="mono ok">$5,432.33</span> — comfortably inside
+      steel, costed per unit at <span class="mono ok">$5,432.33</span>, comfortably inside
       the $7,500 budget, with the gearmotor and actuator as the two dominant costs.
     </p>
     <figure data-reveal class="figure--wide">
@@ -729,17 +763,21 @@
     <div class="callout callout--signal" data-reveal>
       <div class="callout__label">The honest part</div>
       <p>
-        Deflection in the arms came in higher than we predicted. The upper arm's factor of
-        safety of 1.32 sits below the 1.67 ASD reference we were benchmarking against — it
-        does not fail, and it has margin over yield, but it is thinner than we wanted.
+        Deflection during testing came in higher than we predicted, but not mostly where
+        the FEA pointed to. Most of it traced back to the ball bearing seal and the base;
+        the arms themselves only deflected a small amount. Separately, the upper arm's FEA
+        factor of safety of 1.32 does sit below the 1.67 ASD reference we were
+        benchmarking against. It does not fail, and it has margin over yield, but it is
+        thinner than we wanted.
       </p>
       <p style="margin-bottom:0">
-        Our handover recommendation was threefold: increase the shaft size, redesign the
-        bearing mount, and add a guide rail to absorb some of the deflection in the arm.
-        Separately, McMaster lead times ran longer than planned and compressed the
-        fabrication and testing window — on the next one I would order long-lead hardware
-        before the design is fully frozen, and accept a little rework, rather than
-        serializing procurement behind a finished drawing package.
+        Our handover recommendations addressed both: increase the shaft size and redesign
+        the bearing mount to cut the deflection at its source, and add a guide rail as a
+        backstop for the small amount that remains in the arm. Separately, McMaster lead
+        times ran longer than planned and compressed the fabrication and testing window.
+        On the next one I would order long-lead hardware before the design is fully
+        frozen, and accept a little rework, rather than serializing procurement behind a
+        finished drawing package.
       </p>
     </div>
 

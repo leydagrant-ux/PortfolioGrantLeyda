@@ -1,7 +1,7 @@
 /**
  * THE project manifest.
  *
- * Everything on the site that lists projects reads from this array — the cards on the
+ * Everything on the site that lists projects reads from this array: the cards on the
  * home page, the tag filter, and the prev/next links at the foot of each case study.
  * Add an object here and it shows up everywhere. Nothing else needs editing.
  *
@@ -9,7 +9,7 @@
  *
  * Fields
  *   slug      unique id, also used for prev/next ordering
- *   category  'engineering' or 'software' — picks which section on the home page
+ *   category  'engineering' or 'software' (picks which section on the home page)
  *   title     card and pager title
  *   kicker    small mono line above the title
  *   year      shown in the card spec line
@@ -32,8 +32,8 @@ export const projects = [
     tags: ['SolidWorks', 'FEA', 'Manufacturing', 'Hydraulics', 'Team of 6'],
     summary:
       'A 2,000 lb industrial chassis rotator, taken from a sponsor problem statement all the ' +
-      'way to built, load-tested hardware handed over to the sponsor. I owned the pin sizing ' +
-      'and clevis mount analyses.',
+      'way to built, load-tested hardware handed over to the sponsor. The pin sizing and ' +
+      'clevis mount analyses were mine, plus FEA and testing on the restraining arm.',
     metrics: [
       { value: '2,000', unit: 'lb capacity' },
       { value: '180', unit: '° rotation' },
@@ -46,13 +46,13 @@ export const projects = [
   {
     slug: 'bankroll',
     category: 'software',
-    title: 'Bankroll — Session Tracking PWA',
+    title: 'Bankroll: Session Tracking PWA',
     kicker: 'Personal Project · Shipped and live',
     year: '2026',
     tags: ['JavaScript', 'Firebase', 'PWA', 'Data Viz'],
     summary:
       'A multi-user progressive web app with real authentication, per-user security rules, and ' +
-      'schema-migrating data import. Built and deployed solo — evidence that a mechanical ' +
+      'schema-migrating data import. Built and deployed solo, evidence that a mechanical ' +
       'engineer can ship working software.',
     metrics: [
       { value: '2,200', unit: 'lines' },
@@ -76,7 +76,7 @@ export const projects = [
     summary:
       'Turns a cooking video into a structured, searchable recipe. Pulls the spoken ' +
       'transcript, has a language model extract ingredients and numbered steps, and stores ' +
-      'the result — images included — so the library survives the original post ' +
+      'the result (images included) so the library survives the original post ' +
       'being deleted.',
     metrics: [
       { value: '20–60', unit: 's per save' },
