@@ -8,7 +8,10 @@
    -------------------------------------------------------------------------- */
 
 :root {
-  /* Dark is the default. The light theme overrides these below. */
+  /* This bare :root block is the DARK palette, but the pages ship with
+     data-theme="light" on <html>, so light is what a first-time visitor sees. The light
+     values live in the :root[data-theme="light"] block below and override these.
+     Changing the site default is therefore a markup change, not a change here. */
   --bg:            #06080b;
   --bg-1:          #0b0f14;
   --bg-2:          #111820;
@@ -822,6 +825,30 @@ figcaption b { color: var(--ink-2); font-weight: 600; }
 
 .figure--wide { max-width: none; }
 .figure--wide img { width: 100%; }
+
+/* Sponsor logo beside the background copy.
+   The artwork has a white background baked into the file, so on the dark theme it would
+   otherwise read as a bright rectangle floating on the page. Sitting it on a deliberate
+   white card makes that white look intended in both themes, which is also how a partner
+   logo is normally presented. */
+.sponsor-row { display: grid; gap: var(--s4); align-items: center; }
+@media (min-width: 880px) {
+  .sponsor-row { grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); gap: var(--s6); }
+}
+.sponsor__card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+  padding: 1.4rem 1.6rem;
+}
+/* Not a <figure>, so the global `figure img` border/background never applies here. */
+.sponsor__card img { display: block; width: 100%; height: auto; }
+.sponsor__cap {
+  margin-top: .7rem;
+  font-size: .84rem;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
 
 .gallery {
   display: grid;

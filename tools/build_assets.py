@@ -402,6 +402,17 @@ def main() -> int:
 
     # Anything dropped into assets/raw/ later is picked up automatically, so adding a new
     # project does not mean editing this file.
+    #
+    # cramalot-logo.png is the capstone sponsor's logo, used to identify who the machine
+    # was built for. Source:
+    # https://recyclinginside.com/wp-content/uploads/2016/06/CRAM-A-LOT-J.V.-Manufacturing-Inc..jpg
+    # That original is 484x484 with the mark sitting in a band of white padding; it was
+    # auto-cropped to its non-white bounding box (+6 px) giving the 484x99 file here.
+    # This combined "CRAM-A-LOT / J.V. Manufacturing, Inc." version is preferred over the
+    # 208x94 logo on cram-a-lot.com because it names JVM, the plant the team actually
+    # worked with, and it is more than twice the resolution.
+    # It is deliberately NOT resized up — _fit() leaves anything under MAX_EDGE alone, so
+    # it stays at native resolution rather than being blurred by an upscale.
     extras = [p for p in sorted(RAW_IN.iterdir()) if p.suffix.lower() in
               {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff"}] if RAW_IN.exists() else []
     if extras:

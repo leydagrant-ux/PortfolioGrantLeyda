@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="css/site.css">
 
 <script>
-  // Applied before first paint so a light-theme visitor never sees a dark flash.
+  // Applied before first paint so a returning dark-theme visitor never sees a light flash.
   try {
     var t = localStorage.getItem('gl-theme');
     if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
@@ -33,7 +33,7 @@
     <a href="#engineering">Engineering</a>
     <a href="#software">Software</a>
     <a href="assets/Grant_Leyda_Resume_2026.pdf">Résumé</a>
-    <button class="icon-btn" data-theme-toggle aria-label="Switch theme">◑</button>
+    <button class="icon-btn" data-theme-toggle aria-label="Switch to dark theme">◐</button>
   </div>
 </nav>
 
