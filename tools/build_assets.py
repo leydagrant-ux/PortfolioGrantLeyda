@@ -175,7 +175,8 @@ MODELS: list[tuple[str, Path]] = [
 ]
 
 DOCUMENTS: list[tuple[str, Path]] = [
-    ("Grant_Leyda_Resume_2026.pdf", ENG / "Grant_Leyda_Resume_2026.pdf"),
+    # The resumes moved into the "Resume and Portfolio" subfolder in Aug 2026.
+    ("Grant_Leyda_Resume_2026.pdf", ENG / "Resume and Portfolio" / "Grant_Leyda_Resume_2026.pdf"),
 ]
 
 # --------------------------------------------------------------------------------------

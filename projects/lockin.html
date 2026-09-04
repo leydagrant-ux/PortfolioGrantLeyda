@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LockIN: Training Program Engine | Grant Leyda</title>
+<meta name="description" content="A two-person training app with a real progression engine: double progression with auto-regulation, estimated one-rep max, macro targets, and a 369-check regression suite, running on a zero-cost stack.">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="LockIN: Training Program Engine | Grant Leyda">
+<meta property="og:description" content="Progressive overload as a control problem: a training app with a tested progression engine, a locked-down API, and a $0 monthly bill.">
+<meta property="og:image" content="../assets/img/lockin-cover.webp">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2306080b'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='monospace' fill='%23e8455c'>G</text></svg>">
+<link rel="stylesheet" href="../css/site.css">
+
+<script>
+  try {
+    var t = localStorage.getItem('gl-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+</head>
+
+<body data-base="../">
+
+<nav class="nav">
+  <a class="nav__brand" href="../index.html">Grant Leyda <span>/ ME</span></a>
+  <div class="nav__links">
+    <a href="../index.html#engineering">Engineering</a>
+    <a href="../index.html#software">Software</a>
+    <a href="../assets/Grant_Leyda_Resume_2026.pdf">Résumé</a>
+    <button class="icon-btn" data-theme-toggle aria-label="Switch to dark theme">◐</button>
+  </div>
+</nav>
+
+<!-- ===================================================================== -->
+<header class="case-hero">
+  <div class="case-hero__inner wrap">
+    <a class="backlink" href="../index.html#software">← All work</a>
+    <div class="hero__kicker">Personal Project · 2026</div>
+    <h1>LockIN</h1>
+    <p class="lede">
+      A training app built for two people, with an actual progression engine underneath it
+      rather than a workout log with a text box. It plans the next session from what the last
+      one produced, tracks the analytics that matter, and runs on a stack that costs nothing
+      a month to operate.
+    </p>
+
+    <div class="facts">
+      <div><div class="fact__k">Role</div><div class="fact__v">Sole designer and developer</div></div>
+      <div><div class="fact__k">Frontend</div><div class="fact__v">Installable PWA · ~9,700 lines</div></div>
+      <div><div class="fact__k">Backend</div><div class="fact__v">Cloudflare Worker · Firebase</div></div>
+      <div><div class="fact__k">Testing</div><div class="fact__v">369-check regression suite</div></div>
+      <div><div class="fact__k">Status</div><div class="fact__v">Deployed and live</div></div>
+    </div>
+
+    <div class="hero__cta" style="margin-top:2rem">
+      <a class="btn btn--primary" href="https://leydagrant-ux.github.io/LockIN/?demo" rel="noopener">
+        Open the demo <span aria-hidden="true">→</span>
+      </a>
+      <a class="btn" href="https://github.com/leydagrant-ux/LockIN" rel="noopener">Source on GitHub</a>
+    </div>
+    <p class="small" style="margin-top:0.75rem; opacity:0.75">
+      The demo link runs the whole app on generated data, no account needed.
+    </p>
+  </div>
+</header>
+
+<!-- ===================================================================== -->
+<section class="section">
+  <div class="wrap prose">
+
+    <div class="eyebrow"><span class="eyebrow__i">01</span> The problem</div>
+    <h2 style="margin-top:0" data-reveal>Logging a workout is not programming one</h2>
+    <p data-reveal>
+      Most training apps are spreadsheets with nicer fonts. They record what you did and
+      leave the actual question, what you should do next week, entirely to you. The apps that
+      do decide for you tend to hide the reasoning, so when the number they hand you is wrong
+      there is no way to tell whether it is wrong because the model is bad or because you had
+      a bad night's sleep.
+    </p>
+    <p data-reveal>
+      I wanted the decision itself written down as rules I could inspect, argue with, and
+      test.
+    </p>
+
+    <div class="eyebrow" style="margin-top:3rem"><span class="eyebrow__i">02</span> How it works</div>
+    <h2 data-reveal>The progression engine</h2>
+    <p data-reveal>
+      The core is a set of deterministic rules, not a model call. Double progression drives
+      load and reps within a set range. Weekly volume climbs from a starting landmark toward
+      a ceiling across a block and then deloads. A readiness input regulates the whole thing,
+      so a week of poor sleep pulls the prescription down instead of marching the plan off a
+      cliff.
+    </p>
+
+    <div class="table-scroll" data-reveal>
+      <table>
+        <thead>
+          <tr><th>Component</th><th>What it computes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Progression</b></td><td>Next session's load and reps, from the previous session's performance against a target rep range.</td></tr>
+          <tr><td><b>Block structure</b></td><td>Volume ramped from a starting landmark to a ceiling across a training block, then a deload.</td></tr>
+          <tr><td><b>Auto-regulation</b></td><td>Readiness inputs scale the prescription up or down rather than overriding it.</td></tr>
+          <tr><td><b>Analytics</b></td><td>Estimated one-rep max, tonnage, weight trend, per-muscle heatmap, weekly score and streaks.</td></tr>
+          <tr><td><b>Nutrition</b></td><td>Macro targets from a standard metabolic-rate equation, with food lookup by search or barcode.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="eyebrow" style="margin-top:3rem"><span class="eyebrow__i">03</span> Design decisions</div>
+    <h2 data-reveal>Key design decisions</h2>
+
+    <h3 data-reveal>Test the maths, because nobody notices when it drifts</h3>
+    <p data-reveal>
+      A wrong stress calculation announces itself when the part breaks. A wrong training
+      calculation just quietly gives you a slightly stupid workout for six weeks. So the
+      arithmetic is covered by a regression suite of 369 checks that runs in the browser:
+      progression cases worked by hand, calendar-week handling swept across four years of
+      dates to catch year-boundary bugs, score components verified to sum correctly, and the
+      one-rep-max and metabolic-rate formulas checked against textbook values rather than
+      against themselves.
+    </p>
+
+    <h3 data-reveal>Keep the model on a short leash</h3>
+    <p data-reveal>
+      The language model does the part it is genuinely good at, turning a messy description
+      into structure, and is kept away from the part it is bad at, which is arithmetic. Every
+      call goes through a strict schema, and every call is proxied through a small server-side
+      worker so the API keys never reach the browser. The worker fails closed by design: it
+      rejects the wrong method, rejects an unapproved origin, and rejects a request without a
+      valid signed-in token.
+    </p>
+
+    <h3 data-reveal>Constraints first: two users, zero dollars</h3>
+    <p data-reveal>
+      This was never going to be a product, so I designed against the real constraints instead
+      of imaginary ones. Two accounts, a free hosting tier, and free API tiers set the budget
+      at nothing per month, and that budget is what chose the architecture: static hosting, a
+      generous free-tier worker, and a hosted database with rules doing the authorisation
+      rather than a server I would have to maintain.
+    </p>
+
+    <div class="callout" data-reveal>
+      <div class="callout__label">Verifying the locks, not assuming them</div>
+      <p style="margin-bottom:0">
+        Security rules that have never been tested are decoration. After deploying, I probed
+        the live database directly with unauthenticated requests against both users' records
+        and their subcollections and confirmed every read and every write came back denied,
+        and checked the worker returned the right refusal for a hostile origin, a missing
+        token, and a wrong request method. Writing the rule and confirming the rule are two
+        different jobs.
+      </p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:3rem"><span class="eyebrow__i">04</span> Why it belongs here</div>
+    <h2 data-reveal>Relevance to engineering work</h2>
+    <p data-reveal>
+      Progressive overload is a control problem. There is a plant that responds to input with
+      delay and noise, a target trajectory, and a feedback signal that is partly unreliable.
+      The interesting engineering is in the same places it always is: choosing what to trust,
+      deciding how hard to correct when the feedback is bad, and building in a scheduled
+      backoff so the system does not accumulate damage.
+    </p>
+    <p data-reveal>
+      The habit I actually carried over from the capstone is verifying rather than assuming.
+      Hand-checking a progression case against the rules is the same instinct as hand-checking
+      an FEA result against a closed-form calculation before believing the colours.
+    </p>
+
+    <div class="callout" data-reveal>
+      <div class="callout__label">The honest part</div>
+      <p>
+        It is built for two specific people and it shows. There is no onboarding to speak of,
+        the training conventions it encodes are opinionated choices rather than settled
+        science, and nothing about the data model anticipates a third user with different
+        preferences. That was the right call for the scope, but it is a rewrite, not a
+        toggle, if it ever needs to serve strangers.
+      </p>
+      <p style="margin-bottom:0">
+        The body-diagram artwork is not mine: it comes from an open-source component under an
+        MIT licence, which is credited in the repository. The per-muscle mapping onto the
+        exercise library is mine, but I did not draw the anatomy and would rather say so than
+        let a portfolio imply otherwise.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight">
+  <div class="wrap">
+    <nav class="pager" data-pager aria-label="More projects"></nav>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h2>Let's talk</h2>
+        <p class="lede">I am happy to walk through the code or the design decisions.</p>
+        <a class="btn btn--primary" href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:1rem">Contact</div>
+        <div class="footer__links">
+          <a href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+          <a href="tel:+18176278156">817-627-8156</a>
+          <a href="https://www.linkedin.com/in/grant-leyda" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/leydagrant-ux" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__meta">
+      <span>© 2026 Grant Leyda</span>
+      <span>Bedford, Texas</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+  import { initAll } from '../js/main.js';
+  import { renderPager } from '../js/project-cards.js';
+  renderPager('lockin');
+  initAll();
+</script>
+
+</body>
+</html>

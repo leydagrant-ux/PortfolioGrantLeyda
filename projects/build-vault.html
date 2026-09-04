@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build Vault | Grant Leyda</title>
+<meta name="description" content="A single-file web app that turns a build video into an honest analysis, a step-by-step plan, and the prompt to start from, with a structured extraction schema and zero server infrastructure.">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build Vault | Grant Leyda">
+<meta property="og:description" content="Send it a build video, get back a step-by-step plan: structured extraction, a reality check on what the video oversold, and no server to run.">
+<meta property="og:image" content="../assets/img/build-vault-cover.webp">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2306080b'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='monospace' fill='%23e8455c'>G</text></svg>">
+<link rel="stylesheet" href="../css/site.css">
+
+<script>
+  try {
+    var t = localStorage.getItem('gl-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+</head>
+
+<body data-base="../">
+
+<nav class="nav">
+  <a class="nav__brand" href="../index.html">Grant Leyda <span>/ ME</span></a>
+  <div class="nav__links">
+    <a href="../index.html#engineering">Engineering</a>
+    <a href="../index.html#software">Software</a>
+    <a href="../assets/Grant_Leyda_Resume_2026.pdf">Résumé</a>
+    <button class="icon-btn" data-theme-toggle aria-label="Switch to dark theme">◐</button>
+  </div>
+</nav>
+
+<!-- ===================================================================== -->
+<header class="case-hero">
+  <div class="case-hero__inner wrap">
+    <a class="backlink" href="../index.html#software">← All work</a>
+    <div class="hero__kicker">Personal Project · 2026</div>
+    <h1>Build Vault</h1>
+    <p class="lede">
+      Send it a link to a build video and it returns a working plan: what the project
+      actually is, what the video oversold, the cheapest route to the same result, and a
+      numbered sequence to follow. It runs entirely in the browser with no server and no
+      database to operate.
+    </p>
+
+    <div class="facts">
+      <div><div class="fact__k">Role</div><div class="fact__v">Sole designer and developer</div></div>
+      <div><div class="fact__k">Application</div><div class="fact__v">One HTML file · ~3,800 lines</div></div>
+      <div><div class="fact__k">Extraction</div><div class="fact__v">Transcript and screen read · Claude</div></div>
+      <div><div class="fact__k">Storage</div><div class="fact__v">IndexedDB · GitHub sync</div></div>
+      <div><div class="fact__k">Status</div><div class="fact__v">Deployed and live</div></div>
+    </div>
+
+    <div class="hero__cta" style="margin-top:2rem">
+      <a class="btn btn--primary" href="https://leydagrant-ux.github.io/BuildVault/" rel="noopener">
+        Open the app <span aria-hidden="true">→</span>
+      </a>
+      <a class="btn" href="https://github.com/leydagrant-ux/BuildVault" rel="noopener">Source on GitHub</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================================================================== -->
+<section class="section">
+  <div class="wrap prose">
+
+    <div class="eyebrow"><span class="eyebrow__i">01</span> The problem</div>
+    <h2 style="margin-top:0" data-reveal>A saved video is not a plan</h2>
+    <p data-reveal>
+      Short-form video is full of people building genuinely useful things, and it is a
+      terrible format for learning how to build them. The interesting part goes by in two
+      seconds of screen recording, the voiceover is written to sell rather than to explain,
+      and the comments never contain the one detail that would let you start.
+    </p>
+    <p data-reveal>
+      Saving those videos produced a folder of things I could not act on. What I wanted was
+      the opposite of a bookmark: a short, honest read on what the project really involves
+      and a first step concrete enough to begin on a weeknight.
+    </p>
+
+    <div class="eyebrow" style="margin-top:3rem"><span class="eyebrow__i">02</span> How it works</div>
+    <h2 data-reveal>Four stages</h2>
+
+    <div class="table-scroll" data-reveal>
+      <table>
+        <thead>
+          <tr><th>Stage</th><th>What happens</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Capture</b></td><td>A video link is pasted in, or handed over from the phone's share sheet. A typed description works too, and costs nothing to process.</td></tr>
+          <tr><td><b>Read</b></td><td>The spoken transcript and a separate visual read of the screen are pulled from the video, because the two carry different information.</td></tr>
+          <tr><td><b>Plan</b></td><td>A language model fills a fixed schema: what it is, what is required, an ordered set of steps, and a cheaper alternate route.</td></tr>
+          <tr><td><b>Keep</b></td><td>The record is written to the browser's own database and synced across devices, with a status you can move from idea to building to done.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="eyebrow" style="margin-top:3rem"><span class="eyebrow__i">03</span> Design decisions</div>
+    <h2 data-reveal>Key design decisions</h2>
+
+    <h3 data-reveal>Read the screen, not just the audio</h3>
+    <p data-reveal>
+      The obvious build is transcript-only, and it is the wrong one here. In a build video
+      the narration is promotion; the actual evidence is on screen in the terminal, the file
+      tree and the typed commands. So the visual read runs on every single save rather than
+      as a fallback when the transcript is thin.
+    </p>
+    <p data-reveal>
+      That decision costs real money, roughly nine credits for a ninety-second video against
+      a free allowance of a hundred a month, which works out to about eleven saves. I took
+      that ceiling deliberately and added the typed-description path, which uses no credits
+      at all, to take pressure off it. Knowing the budget before committing to the design is
+      the whole point.
+    </p>
+
+    <h3 data-reveal>Separate what was shown from what was inferred</h3>
+    <p data-reveal>
+      A plan that quietly presents a guess as an observation is worse than no plan. Every
+      step carries a flag for whether it was actually visible in the video, and every item in
+      the tooling list carries a confidence level. The schema also has a field for what the
+      video oversold, and a separate one for whether the thing is buildable at all, which
+      catches videos that are really advertisements for a paid product and files them
+      somewhere else instead of throwing them away.
+    </p>
+
+    <h3 data-reveal>Sync with no infrastructure</h3>
+    <p data-reveal>
+      Capture happens on a phone and the actual work happens on a laptop, so the two
+      libraries had to agree without introducing a server. Records sync through a private
+      repository over the ordinary web API, last write wins per record. Deletions write a
+      tombstone rather than simply disappearing, because without one the other device
+      helpfully restores everything you just deleted. A failed sync never blocks the app; the
+      local copy stays authoritative.
+    </p>
+
+    <div class="callout" data-reveal>
+      <div class="callout__label">Spending less on the easy case</div>
+      <p style="margin-bottom:0">
+        Videos that cover several projects at once are common, so a cheap first pass just
+        counts them and asks which one to plan, and only then runs the expensive reasoning
+        pass on the one you picked. Single-project videos skip the question entirely. The
+        expensive read of the video happens once regardless, so a video covering five
+        projects costs the same as one covering a single project.
+      </p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:3rem"><span class="eyebrow__i">04</span> Why it belongs here</div>
+    <h2 data-reveal>Relevance to engineering work</h2>
+    <p data-reveal>
+      This is a requirements problem wearing a different hat. An unstructured source gets
+      read, the claims in it get separated from the evidence for them, the result gets forced
+      into a fixed schema, and what could not be verified is labelled as such. That is the
+      same discipline as writing a test report where measured values and assumptions do not
+      get to share a column.
+    </p>
+    <p data-reveal>
+      The cost decision is the one I would defend hardest. A fixed monthly allowance is a
+      constraint like any other, and the design was set against it on purpose: pay for the
+      read that carries the real information, add a free path to relieve the ceiling, and
+      never pay twice for the same input.
+    </p>
+
+    <div class="callout" data-reveal>
+      <div class="callout__label">The honest part</div>
+      <p>
+        Eleven video saves a month is a real ceiling, and it is the thing most likely to
+        frustrate someone else using it. The free typed-description path softens that, but it
+        does not remove it, and a paid tier would be the correct fix rather than a cleverer
+        workaround.
+      </p>
+      <p style="margin-bottom:0">
+        The output is also only as good as what a video actually shows. When a creator skips
+        the hard part, the plan honestly reports low confidence instead of inventing the
+        missing step, which is the right behaviour but not a satisfying one. If I rebuilt it,
+        I would spend the effort on turning those low-confidence gaps into specific questions
+        worth researching rather than leaving them as a flag.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<section class="section--tight">
+  <div class="wrap">
+    <nav class="pager" data-pager aria-label="More projects"></nav>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h2>Let's talk</h2>
+        <p class="lede">I am happy to walk through the code or the design decisions.</p>
+        <a class="btn btn--primary" href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:1rem">Contact</div>
+        <div class="footer__links">
+          <a href="mailto:leydagrant@gmail.com">leydagrant@gmail.com</a>
+          <a href="tel:+18176278156">817-627-8156</a>
+          <a href="https://www.linkedin.com/in/grant-leyda" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/leydagrant-ux" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__meta">
+      <span>© 2026 Grant Leyda</span>
+      <span>Bedford, Texas</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+  import { initAll } from '../js/main.js';
+  import { renderPager } from '../js/project-cards.js';
+  renderPager('build-vault');
+  initAll();
+</script>
+
+</body>
+</html>

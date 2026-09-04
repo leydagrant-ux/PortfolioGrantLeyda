@@ -67,6 +67,46 @@ export const projects = [
     featured: false,
   },
   {
+    slug: 'lockin',
+    category: 'software',
+    title: 'LockIN: Training Program Engine',
+    kicker: 'Personal Project · Deployed and live',
+    year: '2026',
+    tags: ['JavaScript', 'Cloudflare Workers', 'Firebase', 'PWA', 'Testing'],
+    summary:
+      'A training app with a real progression engine underneath it: double progression, ' +
+      'block periodization, and readiness auto-regulation, all deterministic rules rather ' +
+      'than guesswork, covered by a 369-check regression suite and running at zero monthly cost.',
+    metrics: [
+      { value: '369', unit: 'passing checks' },
+      { value: '$0', unit: 'per month' },
+    ],
+    cover: 'assets/img/lockin-cover.webp',
+    alt: 'Title card for the LockIN project, showing training volume climbing across blocks with scheduled deloads',
+    href: 'projects/lockin.html',
+    featured: false,
+  },
+  {
+    slug: 'build-vault',
+    category: 'software',
+    title: 'Build Vault',
+    kicker: 'Personal Project · Deployed and live',
+    year: '2026',
+    tags: ['JavaScript', 'LLM API', 'IndexedDB', 'Structured Extraction'],
+    summary:
+      'Send it a build video and it returns a step-by-step plan, plus an honest read on what ' +
+      'the video oversold and a cheaper route to the same result. One HTML file, no server, ' +
+      'and a schema that separates what was actually shown from what was inferred.',
+    metrics: [
+      { value: '3,800', unit: 'lines, one file' },
+      { value: '0', unit: 'servers' },
+    ],
+    cover: 'assets/img/build-vault-cover.webp',
+    alt: 'Title card for the Build Vault project, showing a four-stage pipeline from reel URL to step-by-step plan',
+    href: 'projects/build-vault.html',
+    featured: false,
+  },
+  {
     slug: 'recipes',
     category: 'software',
     title: 'Recipe Book',
