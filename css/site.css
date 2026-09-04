@@ -656,11 +656,47 @@ section { position: relative; }
 .card__metric b { color: var(--accent); font-weight: 600; }
 
 .card__arrow {
-  margin-left: auto;
-  color: var(--ink-3);
+  color: inherit;
   transition: transform .3s var(--ease), color .3s var(--ease);
 }
-.card:hover .card__arrow { transform: translateX(4px); color: var(--accent); }
+.card:hover .card__arrow { transform: translateX(4px); }
+
+/* Explicit "this is clickable" affordance. The whole card is already a link, but
+   without a labelled call to action people read these as static tiles and never
+   discover the case study underneath. */
+.card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  align-self: flex-start;
+  margin-top: .1rem;
+  font-family: var(--mono);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: gap .3s var(--ease);
+}
+.card:hover .card__cta { gap: .7rem; }
+
+/* On the featured card it gets the full pill treatment, because that card is the
+   first thing anyone sees and it is the one worth opening. */
+.card--featured .card__cta {
+  margin-top: var(--s2);
+  padding: .6rem 1.15rem;
+  font-size: .78rem;
+  border: 1px solid var(--accent-line);
+  border-radius: 100px;
+  background: var(--accent-glow);
+  transition: gap .3s var(--ease), background .3s var(--ease),
+              border-color .3s var(--ease);
+}
+.card--featured:hover .card__cta {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
 
 /* Featured card spans wide and puts media beside the copy. */
 .card--featured { grid-column: 1 / -1; }

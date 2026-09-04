@@ -36,6 +36,9 @@ function cardHTML(p) {
         <div class="card__spec">
           <span class="mono">${esc(p.year)}</span>
           ${metrics}
+        </div>
+        <div class="card__cta">
+          <span>Read the case study</span>
           <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </div>
