@@ -13,7 +13,7 @@
 <meta property="og:image" content="assets/img/cad-machine-loaded.webp">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2306080b'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='monospace' fill='%2335d6f2'>G</text></svg>">
-<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/site.css?v=20260904b">
 
 <script>
   // Applied before first paint so a returning dark-theme visitor never sees a light flash.
@@ -303,9 +303,9 @@
 </footer>
 
 <script type="module">
-  import { initAll } from './js/main.js';
-  import { renderCards } from './js/project-cards.js';
-  import { initHeroStage } from './js/viewer3d.js';
+  import { initAll } from './js/main.js?v=20260904b';
+  import { renderCards } from './js/project-cards.js?v=20260904b';
+  import { initHeroStage } from './js/viewer3d.js?v=20260904b';
 
   renderCards();   // must run before initAll so cards get reveal + tilt wired
   initAll();

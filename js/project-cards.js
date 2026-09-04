@@ -33,13 +33,13 @@ function cardHTML(p) {
         <h3 class="card__title">${esc(p.title)}</h3>
         <p class="card__summary">${esc(p.summary)}</p>
         <div class="tags">${tags}</div>
+        <div class="card__cta">
+          <span>Click here to read the full case study</span>
+          <span class="card__arrow" aria-hidden="true">→</span>
+        </div>
         <div class="card__spec">
           <span class="mono">${esc(p.year)}</span>
           ${metrics}
-        </div>
-        <div class="card__cta">
-          <span>Read the case study</span>
-          <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </div>
     </a>`;
